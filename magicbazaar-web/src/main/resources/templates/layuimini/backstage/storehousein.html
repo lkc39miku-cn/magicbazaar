@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>入库信息</title>
+    <meta content="webkit" name="renderer">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+    <link href="/lib/layui-v2.6.3/css/layui.css" media="all" rel="stylesheet">
+    <link href="/css/public.css" media="all" rel="stylesheet">
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+
+        <fieldset class="table-search-fieldset">
+            <legend>搜索信息</legend>
+            <div style="margin: 10px 10px 10px 10px">
+                <form class="layui-form layui-form-pane">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">商品名称</label>
+                            <div class="layui-input-inline">
+                                <input autocomplete="off" class="layui-input" name="commodityName" type="text">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">审核人</label>
+                            <div class="layui-input-inline">
+                                <input autocomplete="off" class="layui-input" name="staffName" type="text">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">提交人</label>
+                            <div class="layui-input-inline">
+                                <input autocomplete="off" class="layui-input" name="targetName" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">当前状态</label>
+                            <div class="layui-input-block">
+                                <input autocomplete="off" class="layui-input" name="storeHouseInStatus" title="未入库"
+                                       type="radio" value="0">
+                                <input autocomplete="off" class="layui-input" name="storeHouseInStatus" title="已入库"
+                                       type="radio" value="1">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">删除状态</label>
+                            <div class="layui-input-block">
+                                <input autocomplete="off" class="layui-input" name="deleteStatus" title="未删除"
+                                       type="radio" value="0">
+                                <input autocomplete="off" class="layui-input" name="deleteStatus" title="已删除"
+                                       type="radio" value="1">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button class="layui-btn layui-btn-primary layui-bg-blue" lay-filter="data-search-btn"
+                                    lay-submit="data-search-btn" type="submit"><i class="layui-icon"></i> 搜 索
+                            </button>
+                            <button class="layui-btn layui-btn-primary layui-bg-red data-reset-btn"
+                                    lay-filter="data-reset-btn" lay-submit type="reset"><i
+                                    class="layui-icon layui-icon-refresh"></i> 重 置
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+
+        <table class="layui-hide" id="store_house_in_table" lay-filter="store_house_in_table"></table>
+
+        <script id="store_house_in_templet" type="text/html">
+
+            {{# if(d.deleteStatus !== 1) { }}
+
+                {{# if(d.storeHouseInStatus !== 1) { }}
+
+                <a class="layui-btn layui-btn-xs layui-bg-orange" lay-event="edit">入库</a>
+
+                {{# } else { }}
+
+                <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+
+                {{# } }}
+
+            {{# } else { }}
+
+            <a class="layui-btn layui-btn-xs layui-btn-danger">已删除</a>
+
+            {{# } }}
+        </script>
+
+    </div>
+</div>
+<form class="layui-form layui-form-pane" hidden id="update-form" lay-filter="update-form">
+    <div class="layui-form-item" hidden>
+        <div class="layui-inline">
+            <div class="layui-input-inline">
+                <input autocomplete="off" class="layui-input" name="id" type="text">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">商品昵称</label>
+            <div class="layui-input-inline">
+                <input autocomplete="off" class="layui-input" lay-verify="required" name="commodityName"
+                       readonly="readonly" required type="text">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">入库数量</label>
+            <div class="layui-input-inline">
+                <input autocomplete="off" class="layui-input" lay-verify="required" name="inNumber" readonly="readonly"
+                       required type="text">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label required">实际入库数量</label>
+            <div class="layui-input-inline">
+                <input autocomplete="off" class="layui-input" lay-verify="required|number" name="realInNumber"
+                       placeholder="请输入实际入库数量" required type="text">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-inline">
+                <textarea autocomplete="off" class="layui-input" name="storeHouseInInfo" placeholder="请输入备注"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <div class="layui-input-block">
+                <button class="layui-btn layui-btn-primary layui-bg-blue" lay-filter="update-submit"
+                        lay-submit="update-submit" type="submit"> 入 库
+                </button>
+                <button class="layui-btn layui-btn-primary layui-bg-red update-form-reset" type="button"> 重 置</button>
+            </div>
+        </div>
+    </div>
+</form>
+<script src="/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+<script charset="utf-8" src="/lib/layui-v2.6.3/layui.js"></script>
+<script charset="utf-8" src="/js/lay-config.js?v=1.0.4"></script>
+<script>
+    $(function () {
+        $('.update-form-reset').on('click', function () {
+            $('input[name="realInNumber"]').val('')
+            $('textarea[name="storeHouseInInfo"]').val('')
+        })
+    })
+
+    let dataValue;
+
+    layui.use(['form', 'table'], function () {
+        const $ = layui.jquery,
+            form = layui.form,
+            table = layui.table;
+
+        table.render({
+            elem: '#store_house_in_table',
+            id: 'store_house_in_table',
+            url: '/admin/store/house/in/list',
+            method: 'post',
+            toolbar: '#',
+            defaultToolbar: ['filter', 'exports', 'print', {
+                title: '提示',
+                layEvent: 'LAYTABLE_TIPS',
+                icon: 'layui-icon-tips'
+            }],
+            request: {
+                pageName: 'pageParam.page',
+                limitName: 'pageParam.pageSize'
+            },
+            cols: [
+                [
+                    {field: 'id', width: 80, title: 'ID', sort: true},
+                    {field: 'commodityName', width: 200, title: '商品昵称'},
+                    {field: 'inNumber', width: 120, align: 'center', title: '入库数量', sort: true},
+                    {field: 'realInNumber', width: 180, align: 'center', title: '实际入库数量', sort: true},
+                    {field: 'storeHouseInInfo', width: 180, title: '备注'},
+                    {
+                        field: 'storeHouseInStatus', width: 120, align: 'center', title: '当前状态', templet: function (d) {
+                            if (d.storeHouseInStatus === 0) {
+                                return '<span class="layui-badge layui-bg-orange">未入库</span>';
+                            }
+                            if (d.storeHouseInStatus === 1) {
+                                return '<span class="layui-badge layui-bg-blue">已入库</span>';
+                            }
+                        }
+                    },
+                    {
+                        field: 'deleteStatus', width: 120, align: 'center', title: '删除状态', templet: function (d) {
+                            if (d.deleteStatus === 0) {
+                                return '<span class="layui-badge layui-bg-blue">未删除</span>';
+                            }
+                            if (d.deleteStatus === 1) {
+                                return '<span class="layui-badge layui-bg-red">已删除</span>';
+                            }
+                        }
+                    },
+                    {field: 'staffName', width: 180, title: '审核人'},
+                    {field: 'targetName', width: 180, title: '提交人'},
+                    {field: 'createTime', sort: true, width: 200, align: 'center', title: '创建时间'},
+                    {field: 'updateTime', sort: true, width: 200, align: 'center', title: '修改时间'},
+                    {title: '操作', minWidth: 180, toolbar: '#store_house_in_templet', align: "center", fixed: 'right'}
+                ]
+            ],
+            limits: [10, 15, 20, 25, 50, 100],
+            limit: 15,
+            page: true,
+            skin: 'line'
+        });
+
+        let index;
+
+        // 监听搜索操作
+        form.on('submit(data-search-btn)', function (data) {
+            //执行搜索重载
+            table.reload('store_house_in_table', {
+                page: {
+                    curr: 1
+                }
+                , where: data.field
+            })
+            return false;
+        });
+
+        form.on('submit(data-reset-btn)', function () {
+            //执行搜索重载
+            table.reload('store_house_in_table', {
+                page: {
+                    curr: 1
+                },
+                where: {}
+            });
+        });
+
+        form.on('submit(update-submit)', function (data) {
+            if (data.field.realInNumber < 0) {
+                layer.msg('请输入符合要求的数据');
+                return false;
+            }
+            if (data.field.realInNumber > dataValue.inNumber) {
+                layer.msg('请输入符合要求的数据');
+                return false;
+            }
+            $.ajax({
+                url: '/admin/store/house/in/update',
+                type: 'post',
+                dataType: 'json',
+                data: data.field,
+                success: function (result) {
+                    layer.msg(result.msg);
+                    layer.close(index);
+                    if (result.success) {
+                        $('.data-reset-btn').click();
+                    }
+                }
+            });
+            return false;
+        });
+
+        table.on('tool(store_house_in_table)', function (obj) {
+            const data = obj.data;
+            if (obj.event === 'edit') {
+                $('.update-form-reset').click();
+                dataValue = data;
+                index = layer.open({
+                    title: '入库信息填写',
+                    type: 1,
+                    shade: 0.2,
+                    shadeClose: true,
+                    area: ['100%', '100%'],
+                    content: $('#update-form'),
+                });
+                $(window).on("resize", function () {
+                    layer.full(index);
+                });
+                form.val('update-form', data);
+            } else if (obj.event === 'delete') {
+                layer.confirm('删除该数据可能在盘点时会存在商品数量差异，真的删除该数据么？', function (index) {
+                    $.ajax({
+                        url: '/admin/store/house/in/delete',
+                        type: 'post',
+                        data: {
+                            id: data.id
+                        },
+                        dataType: 'json',
+                        success: function (result) {
+                            layer.msg(result.msg);
+                            if (result.success) {
+                                $('.data-reset-btn').click();
+                            }
+                            layer.close(index);
+                        }
+                    });
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>

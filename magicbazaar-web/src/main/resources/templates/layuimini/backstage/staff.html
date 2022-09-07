@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>员工信息</title>
+    <meta content="webkit" name="renderer">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+    <link href="/lib/layui-v2.6.3/css/layui.css" media="all" rel="stylesheet">
+    <link href="/css/public.css" media="all" rel="stylesheet">
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+
+        <fieldset class="table-search-fieldset">
+            <legend>搜索信息</legend>
+            <div style="margin: 10px 10px 10px 10px">
+                <form class="layui-form layui-form-pane">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">用户名</label>
+                            <div class="layui-input-inline">
+                                <input autocomplete="off" class="layui-input" name="username" type="text">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">手机号</label>
+                            <div class="layui-input-inline">
+                                <input autocomplete="off" class="layui-input" name="phone" type="text">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">邮箱</label>
+                            <div class="layui-input-inline">
+                                <input autocomplete="off" class="layui-input" name="email" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">禁用状态</label>
+                            <div class="layui-input-block">
+                                <input autocomplete="off" class="layui-input" name="publishStatus" title="未禁用"
+                                       type="radio" value="0">
+                                <input autocomplete="off" class="layui-input" name="publishStatus" title="已禁用"
+                                       type="radio" value="1">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">删除状态</label>
+                            <div class="layui-input-block">
+                                <input autocomplete="off" class="layui-input" name="deleteStatus" title="未删除"
+                                       type="radio" value="0">
+                                <input autocomplete="off" class="layui-input" name="deleteStatus" title="已删除"
+                                       type="radio" value="1">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button class="layui-btn layui-btn-primary layui-bg-blue" lay-filter="data-search-btn"
+                                    lay-submit="data-search-btn" type="submit"><i class="layui-icon"></i> 搜 索
+                            </button>
+                            <button class="layui-btn layui-btn-primary layui-bg-red data-reset-btn"
+                                    lay-filter="data-reset-btn" lay-submit type="reset"><i
+                                    class="layui-icon layui-icon-refresh"></i> 重 置
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+
+        <script id="staff_table_toolbar" type="text/html">
+            <div class="layui-btn-container">
+                <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加</button>
+            </div>
+        </script>
+
+        <table class="layui-hide" id="staff_table" lay-filter="staff_table"></table>
+
+        <script id="staff_table_templet" type="text/html">
+            {{# if(d.deleteStatus === 0) { }}
+            <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
+            <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="role">身份管理</a>
+            {{# if(d.publishStatus === 0){ }}
+            <a class="layui-btn layui-bg-orange layui-btn-xs data-count-off" lay-event="off">禁用</a>
+            {{# } else{ }}
+            <a class="layui-btn layui-bg-orange layui-btn-xs data-count-on" lay-event="on">启用</a>
+            {{# } }}
+            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+            {{# } else { }}
+            <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="">已删除</a>
+            {{# } }}
+        </script>
+    </div>
+</div>
+<div class="role" hidden>
+    <form class="layui-form" id="role-form" lay-filter="role-form" style="padding:20px;">
+        <div class="layui-form-item">
+            <label class="layui-form-label">多选</label>
+            <div class="layui-input-block">
+                <input hidden name="id" type="text">
+                <input type="text" name="idList" hidden class="idList">
+                <input autocomplete="off" class="layui-input" id="role" lay-verify="required" name="rolename"
+                       placeholder="请选择" required ts-selected="" type="text">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <button class="layui-btn layui-bg-blue" lay-filter="role" lay-submit="role" type="submit">修改</button>
+            </div>
+        </div>
+    </form>
+</div>
+<form class="layui-form layui-form-pane" hidden id="add-form" lay-filter="add-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label required">用户名</label>
+            <div class="layui-input-inline">
+                <input autocomplete="off" class="layui-input" lay-verify="required" name="username" placeholder="请输入用户名"
+                       required type="text">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label required">密码</label>
+            <div class="layui-input-inline">
+                <input autocomplete="off" class="layui-input" lay-verify="required" name="password" placeholder="请输入密码"
+                       required type="password">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label required">手机号</label>
+            <div class="layui-input-inline">
+                <input autocomplete="off" class="layui-input phone-input" lay-verify="required|phone" name="phone"
+                       placeholder="请输入手机号" required type="text">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label required">验证码</label>
+            <div class="layui-input-inline">
+                <input autocomplete="off" class="layui-input" lay-verify="required" name="phoneCode"
+                       placeholder="请输入验证码" required type="text">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <button class="layui-btn layui-btn-primary phone" type="button">发送验证码</button>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label required">邮箱</label>
+            <div class="layui-input-inline">
+                <input autocomplete="off" class="layui-input email-input" lay-verify="required|email" name="email"
+                       placeholder="请输入邮箱" required type="text">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label required">验证码</label>
+            <div class="layui-input-inline">
+                <input autocomplete="off" class="layui-input" lay-verify="required" name="emailCode"
+                       placeholder="请输入验证码" required type="text">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <button class="layui-btn layui-btn-primary email" type="button">发送验证码</button>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <div class="layui-input-block">
+                <button class="layui-btn layui-btn-primary layui-bg-blue" lay-filter="add-submit"
+                        lay-submit="add-submit" type="submit"> 添 加
+                </button>
+                <button class="layui-btn layui-btn-primary layui-bg-red add-form-reset" type="reset"> 重 置</button>
+            </div>
+        </div>
+    </div>
+</form>
+<form class="layui-form layui-form-pane" hidden id="update-form" lay-filter="update-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label required">用户名</label>
+            <div class="layui-input-inline">
+                <input hidden name="id" type="text">
+                <input autocomplete="off" class="layui-input" lay-verify="required" name="username" placeholder="请输入用户名"
+                       required type="text" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label required">密码</label>
+            <div class="layui-input-inline">
+                <input autocomplete="off" class="layui-input" lay-verify="required" name="password" placeholder="请输入密码"
+                       required type="password">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label required">手机号</label>
+            <div class="layui-input-inline">
+                <input autocomplete="off" class="layui-input phone-input" lay-verify="required|phone" name="phone"
+                       placeholder="请输入手机号" required type="text">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label required">验证码</label>
+            <div class="layui-input-inline">
+                <input autocomplete="off" class="layui-input" lay-verify="required" name="phoneCode"
+                       placeholder="请输入验证码" required type="text">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <button class="layui-btn layui-btn-primary phone" type="button">发送验证码</button>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label required">邮箱</label>
+            <div class="layui-input-inline">
+                <input autocomplete="off" class="layui-input email-input" lay-verify="required|email" name="email"
+                       placeholder="请输入邮箱" required type="text">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label required">验证码</label>
+            <div class="layui-input-inline">
+                <input autocomplete="off" class="layui-input" lay-verify="required" name="emailCode"
+                       placeholder="请输入验证码" required type="text">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <button class="layui-btn layui-btn-primary email" type="button">发送验证码</button>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <div class="layui-input-block">
+                <button class="layui-btn layui-btn-primary layui-bg-blue" lay-filter="update-submit"
+                        lay-submit="update-submit" type="submit"> 修改
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+<script src="/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+<script charset="utf-8" src="/lib/layui-v2.6.3/layui.js"></script>
+<script charset="utf-8" src="/js/lay-config.js?v=1.0.4"></script>
+<script>
+    layui.use(['table', 'form', 'tableSelect'], function () {
+        const $ = layui.jquery,
+            table = layui.table,
+            form = layui.form,
+            tableSelect = layui.tableSelect;
+
+        tableSelect.render({
+            elem: '#role',
+            searchKey: 'name',
+            checkedKey: 'id',
+            searchPlaceholder: '请输入名称',
+            table: {
+                url: '/admin/role/list',
+                method: 'post',
+                request: {
+                    pageName: 'pageParam.page',
+                    limitName: 'pageParam.pageSize'
+                },
+                cols: [
+                    [
+                        {type: 'checkbox'},
+                        {field: 'id', title: 'ID', width: 100},
+                        {field: 'name', title: '昵称', width: 300},
+                        {field: '简介', title: '简介', width: 100}
+                    ]
+                ]
+            },
+            done: function (elem, data) {
+                const NEWJSON = [];
+                const name =[];
+                layui.each(data.data, function (index, item) {
+                    NEWJSON.push(item.id)
+                    name.push(item.name)
+                })
+                elem.val(name.join(","))
+                $('input[name="idList"]').val(NEWJSON.join(','));
+            }
+        })
+    })
+</script>
+<script>
+    let phoneTime = 60;
+
+    function phoneTimeArray(ele) {
+        if (phoneTime === 0) {
+            ele.disabled = false;
+            ele.innerHTML = "发送手机验证码";
+            phoneTime = 60;
+        } else {
+            ele.disabled = true;
+            ele.innerHTML = phoneTime + "秒后可以重新发送";
+            phoneTime--;
+            setTimeout(function () {
+                phoneTimeArray(ele)
+            }, 1000)
+        }
+    }
+
+    let emailTime = 60;
+
+    function emailTimeArray(ele) {
+
+        if (emailTime === 0) {
+            ele.disabled = false;
+            ele.innerHTML = "发送邮箱验证码";
+            emailTime = 60;
+        } else {
+            ele.disabled = true;
+            ele.innerHTML = emailTime + "秒后可以重新发送";
+            emailTime--;
+            setTimeout(function () {
+                emailTimeArray(ele)
+            }, 1000)
+        }
+    }
+
+    $(function () {
+        $('.phone').on('click', function () {
+            const phoneVal = $('.phone-input').val()
+            if (/^\d{11}$/.test(phoneVal)) {
+                $.ajax({
+                    type: 'post',
+                    url: '/admin/staff/phonecode',
+                    data: {
+                        phone: phoneVal
+                    },
+                    dataType: 'json'
+                })
+                phoneTimeArray(this);
+            } else {
+                layer.msg('请输入正确的手机号');
+            }
+        })
+
+        $('.email').on('click', function () {
+            const emailVal = $('.email-input').val()
+
+            if (!/^[A-z0-9]+[@][A-z0-9]+[.][A-z0-9]+$/.test(emailVal)) {
+                layer.msg('请输入正确的邮箱');
+                return;
+            }
+
+            $.ajax({
+                url: '/admin/staff/emailcheck',
+                type: 'post',
+                data: {
+                    email: emailVal
+                },
+                dataType: 'json',
+                success: function (result) {
+                    if (result.success) {
+                        // 发送验证码
+                        $.ajax({
+                            type: 'post',
+                            url: '/admin/staff/emailcode',
+                            data: {
+                                email: emailVal
+                            },
+                            dataType: 'json'
+                        })
+                        emailTimeArray(this);
+                    } else {
+                        layer.msg(result.msg);
+                    }
+                }
+            })
+        })
+    })
+</script>
+<script>
+    layui.use(['form', 'table'], function () {
+        const $ = layui.jquery,
+            form = layui.form,
+            table = layui.table;
+
+        table.render({
+            elem: '#staff_table',
+            id: 'staff_table',
+            url: '/admin/staff/list',
+            toolbar: '#staff_table_toolbar',
+            method: 'post',
+            defaultToolbar: ['filter', 'exports', 'print', {
+                title: '提示',
+                layEvent: 'LAYTABLE_TIPS',
+                icon: 'layui-icon-tips'
+            }],
+            request: {
+                pageName: 'pageParam.page',
+                limitName: 'pageParam.pageSize'
+            },
+            cols: [
+                [
+                    {field: 'id', width: 80, title: 'ID', sort: true, fixed: 'left'},
+                    {field: 'username', width: 200, title: '用户名'},
+                    {field: 'password', width: 120, title: '密码'},
+                    {field: 'phone', title: '手机号', width: 120},
+                    {field: 'email', title: '邮箱', width: 180},
+                    {
+                        field: 'publishStatus', title: '禁用状态', width: 120, templet: function (d) {
+                            if (d.publishStatus === 0) {
+                                return '<span class="layui-badge layui-bg-blue">未禁用</span>';
+                            }
+                            if (d.publishStatus === 1) {
+                                return '<span class="layui-badge layui-bg-red">已禁用</span>';
+                            }
+                        }
+                    },
+                    {
+                        field: 'deleteStatus', title: '删除状态', width: 120, templet: function (d) {
+                            if (d.deleteStatus === 0) {
+                                return '<span class="layui-badge layui-bg-blue">未删除</span>';
+                            }
+                            if (d.deleteStatus === 1) {
+                                return '<span class="layui-badge layui-bg-red">已删除</span>';
+                            }
+                        }
+                    },
+                    {field: 'createTime', sort: true, width: 200, align: 'center', title: '创建时间'},
+                    {field: 'updateTime', sort: true, width: 200, align: 'center', title: '修改时间'},
+                    {title: '操作', minWidth: 180, toolbar: '#staff_table_templet', align: "center", fixed: 'right'}
+                ]
+            ],
+            limits: [10, 15, 20, 25, 50, 100],
+            limit: 15,
+            page: true,
+            skin: 'line'
+        });
+
+        let index;
+
+        // 监听搜索操作
+        form.on('submit(data-search-btn)', function (data) {
+            //执行搜索重载
+            table.reload('staff_table', {
+                page: {
+                    curr: 1
+                }
+                , where: data.field
+            })
+            return false;
+        });
+
+        form.on('submit(data-reset-btn)', function () {
+            //执行搜索重载
+            table.reload('staff_table', {
+                page: {
+                    curr: 1
+                },
+                where: {}
+            });
+        });
+
+        form.on('submit(role)', function (data) {
+            $.ajax({
+                url: '/admin/staff/role',
+                type: 'post',
+                data: data.field,
+                dataType: 'json',
+                success: function (result) {
+                    layer.msg(result.msg);
+                    if (result.success) {
+                        $('.data-reset-btn').click();
+                        layer.close(index);
+                    }
+                }
+            });
+            return false;
+        })
+
+        // 添加员工
+        form.on('submit(add-submit)', function (data) {
+            $.ajax({
+                url: '/admin/staff/checkname',
+                type: 'post',
+                data: data.field,
+                dataType: 'json',
+                success: function (result) {
+                    if (result.success) {
+                        $.ajax({
+                            url: '/admin/staff/emailcheck',
+                            type: 'post',
+                            data: data.field,
+                            dataType: 'json',
+                            success: function (result) {
+                                if (result.success) {
+                                    $.ajax({
+                                        url: '/admin/staff/add',
+                                        type: 'post',
+                                        data: data.field,
+                                        dataType: 'json',
+                                        success: function (result) {
+                                            layer.msg(result.msg);
+                                            if (result.success) {
+                                                $('.data-reset-btn').click();
+                                                layer.close(index);
+                                            }
+                                        }
+                                    });
+                                } else {
+                                    layer.msg(result.msg);
+                                }
+                            }
+                        })
+                    } else {
+                        layer.msg(result.msg);
+                    }
+                }
+            })
+            return false;
+        });
+
+        // 更新员工
+        form.on('submit(update-submit)', function (data) {
+            $.ajax({
+                url: '/admin/staff/update',
+                type: 'post',
+                dataType: 'json',
+                data: data.field,
+                success: function (result) {
+                    layer.msg(result.msg);
+                    if (result.success) {
+                        $('.data-reset-btn').click();
+                        layer.close(index);
+                    }
+                }
+            });
+            return false;
+        });
+
+        /**
+         * toolbar监听事件
+         */
+        table.on('toolbar(staff_table)', function (obj) {
+            if (obj.event === 'add') {  // 监听添加操作
+                $('.add-form-reset').click();
+                index = layer.open({
+                    title: '添加员工',
+                    type: 1,
+                    shade: 0.2,
+                    shadeClose: true,
+                    area: ['100%', '100%'],
+                    content: $('#add-form'),
+                });
+                $(window).on("resize", function () {
+                    layer.full(index);
+                });
+            }
+        })
+
+        table.on('tool(staff_table)', function (obj) {
+            const data = obj.data;
+            if (obj.event === 'edit') {
+
+                index = layer.open({
+                    title: '编辑员工',
+                    type: 1,
+                    shade: 0.2,
+                    shadeClose: true,
+                    area: ['100%', '100%'],
+                    content: $('#update-form'),
+                });
+                $(window).on("resize", function () {
+                    layer.full(index);
+                });
+                form.val('update-form', data);
+
+            } else if (obj.event === 'delete') {
+                layer.confirm('真的删除行么？', function (index) {
+                    $.ajax({
+                        url: '/admin/staff/delete',
+                        type: 'post',
+                        data: {
+                            id: data.id
+                        },
+                        dataType: 'json',
+                        success: function (result) {
+                            layer.msg(result.msg);
+                            if (result.success) {
+                                $('.data-reset-btn').click();
+                            }
+                            layer.close(index);
+                        }
+                    });
+                });
+            } else if (obj.event === 'on') {
+                layer.confirm('确定要启用吗？', function (index) {
+                    $.ajax({
+                        url: '/admin/staff/on',
+                        type: 'post',
+                        data: {
+                            id: data.id
+                        },
+                        dataType: 'json',
+                        success: function (result) {
+                            layer.msg(result.msg);
+                            if (result.success) {
+                                $('.data-reset-btn').click();
+                            }
+                            layer.close(index);
+                        }
+                    });
+                });
+            } else if (obj.event === 'off') {
+                layer.confirm('确定要禁用吗？', function (index) {
+                    $.ajax({
+                        url: '/admin/staff/off',
+                        type: 'post',
+                        data: {
+                            id: data.id
+                        },
+                        dataType: 'json',
+                        success: function (result) {
+                            layer.msg(result.msg);
+                            if (result.success) {
+                                $('.data-reset-btn').click();
+                            }
+                            layer.close(index);
+                        }
+                    });
+                });
+            } else if (obj.event === 'role') {
+                $.ajax({
+                    type: 'post',
+                    url: '/admin/staff/role/use',
+                    data: {
+                        id: data.id
+                    },
+                    dataType: 'json',
+                    success: function (result) {
+                        let attrValue = '';
+
+                        $.each(result.data, function (i, object) {
+                            if (i !== result.data.length - 1) {
+                                attrValue += object.roleId + ',';
+                            } else {
+                                attrValue += object.roleId;
+                            }
+                        })
+
+                        $('#role').attr('ts-selected', attrValue).attr('value', attrValue);
+                        $('.idList').val(attrValue);
+                    }
+                })
+
+                form.val('role-form', data)
+                index = layer.open({
+                    title: '修改身份',
+                    type: 1,
+                    shade: 0.2,
+                    shadeClose: true,
+                    area: ['100%', '100%'],
+                    content: $('.role'),
+                });
+                $(window).on("resize", function () {
+                    layer.full(index);
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>

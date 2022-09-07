@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品类型信息</title>
+    <meta content="webkit" name="renderer">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+    <link href="/lib/layui-v2.6.3/css/layui.css" media="all" rel="stylesheet">
+    <link href="/css/public.css" media="all" rel="stylesheet">
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+
+        <script id="commodity-type-table-toolbar" type="text/html">
+            <div class="layui-btn-container">
+                <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加</button>
+            </div>
+        </script>
+
+        <table class="layui-hide" id="commodity-type-table" lay-filter="commodity-type-table"></table>
+
+        <script id="commodity-type-table-templet" type="text/html">
+            {{# if(d.sort !== null){ }}
+            <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
+            {{# if(d.publishStatus === 1){ }}
+            <a class="layui-btn layui-bg-orange layui-btn-xs data-count-off" lay-event="off">禁用</a>
+            {{# } else { }}
+            <a class="layui-btn layui-bg-orange layui-btn-xs data-count-on" lay-event="on">启用</a>
+            {{# } }}
+            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+            {{# } }}
+        </script>
+
+    </div>
+</div>
+<form class="layui-form layui-form-pane" hidden id="add-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label required">类型昵称</label>
+            <div class="layui-input-inline">
+                <input autocomplete="off" class="layui-input" lay-verify="required" name="name" placeholder="请输入昵称"
+                       required type="text">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">排序</label>
+            <div class="layui-input-inline">
+                <input autocomplete="off" class="layui-input" lay-verify="number" name="sort" placeholder="请输入排序"
+                       required type="text">
+                <tip>对于该类型图标的展示顺序，可使用相同顺序</tip>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">icon</label>
+            <div class="layui-input-inline">
+                <input autocomplete="off" class="layui-input" name="menuIcon" placeholder="请输入路径" type="text">
+                <tip>对于该类型图标的展示，可使用 css 类名</tip>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label required">菜单父级</label>
+            <div class="layui-input-block">
+                <input autocomplete="off" checked class="layui-input" lay-filter="isMenu" name="isMenu" title="是"
+                       type="radio" value="0">
+                <input autocomplete="off" class="layui-input" lay-filter="isMenu" name="isMenu" title="不是" type="radio"
+                       value="1">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">父级名称</label>
+            <div class="layui-input-block">
+                <select disabled="disabled" id="parentId" lay-search name="parentId"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <div class="layui-input-block">
+                <button class="layui-btn layui-btn-primary layui-bg-blue" lay-filter="add-submit"
+                        lay-submit="add-submit" type="submit"> 添 加
+                </button>
+                <button class="layui-btn layui-btn-primary layui-bg-red add-form-reset" type="reset"> 重 置</button>
+            </div>
+        </div>
+    </div>
+</form>
+<form class="layui-form layui-form-pane" hidden id="update-form" lay-filter="update-form">
+    <div class="layui-form-item" hidden>
+        <div class="layui-inline">
+            <label class="layui-form-label">ID</label>
+            <div class="layui-input-inline">
+                <input autocomplete="off" class="layui-input" name="id" type="text">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label required">类型昵称</label>
+            <div class="layui-input-inline">
+                <input autocomplete="off" class="layui-input" lay-verify="required" name="name" placeholder="请输入昵称"
+                       required type="text">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">排序</label>
+            <div class="layui-input-inline">
+                <input autocomplete="off" class="layui-input" lay-verify="number" name="sort" placeholder="请输入排序"
+                       required type="text">
+                <tip>对于该类型图标的展示顺序，可使用相同顺序</tip>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">icon</label>
+            <div class="layui-input-inline">
+                <input autocomplete="off" class="layui-input" name="menuIcon" placeholder="请输入路径" type="text">
+                <tip>对于该类型图标的展示，可使用 css 类名</tip>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item no-show">
+        <div class="layui-inline">
+            <label class="layui-form-label required">菜单父级</label>
+            <div class="layui-input-block">
+                <input autocomplete="off" class="layui-input" lay-filter="isMenu" name="isMenu" title="是" type="radio"
+                       value="0">
+                <input autocomplete="off" class="layui-input" lay-filter="isMenu" name="isMenu" title="不是" type="radio"
+                       value="1">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item no-show">
+        <div class="layui-inline">
+            <label class="layui-form-label">父级名称</label>
+            <div class="layui-input-block">
+                <select disabled="disabled" id="parentId-update" lay-search name="parentId"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <div class="layui-input-block">
+                <button class="layui-btn layui-btn-primary layui-bg-blue" lay-filter="update-submit"
+                        lay-submit="update-submit" type="submit"> 更 新
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script src="/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+<script charset="utf-8" src="/lib/layui-v2.6.3/layui.js"></script>
+<script charset="utf-8" src="/js/lay-config.js?v=1.0.4"></script>
+<script>
+    function loadTree() {
+        layui.use(['form', 'table', 'treetable'], function () {
+            const $ = layui.jquery,
+                form = layui.form,
+                table = layui.table,
+                treetable = layui.treetable;
+
+            // 渲染表格
+            layer.load(2);
+            treetable.render({
+                treeColIndex: 1,
+                treeSpid: -1,
+                url: '/admin/commodity/type/list',
+                where: {
+                    tree: true
+                },
+                toolbar: '#commodity-type-table-toolbar',
+                treeIdName: 'id',
+                treePidName: 'parentId',
+                elem: '#commodity-type-table',
+                page: false,
+                cols: [
+                    [
+                        {field: 'id', width: 50, title: 'ID'},
+                        {field: 'name', minWidth: 200, title: '类型名称'},
+                        {
+                            field: 'publishStatus', title: '启用状态', templet: function (d) {
+                                if (d.publishStatus === 1) {
+                                    return '已启用'
+                                } else if (d.publishStatus === 0) {
+                                    return '未启用'
+                                } else {
+                                    return ''
+                                }
+                            }
+                        },
+                        {field: 'sort', width: 80, align: 'center', title: '排序'},
+                        {
+                            field: 'isMenu', width: 100, align: 'center', templet: function (d) {
+                                if (d.isMenu === 1) {
+                                    return '<span class="layui-badge layui-bg-orange">子类型</span>';
+                                }
+                                if (d.parentId === -1) {
+                                    return '<span class="layui-badge layui-bg-blue">商品分类</span>';
+                                } else {
+                                    return '<span class="layui-badge-rim layui-bg-red">主类型</span>';
+                                }
+                            }, title: '类型'
+                        },
+                        {
+                            field: 'parentId', minWidth: 80, title: '父级', templet: function (d) {
+                                if (d.parentId === -1) {
+                                    return '';
+                                } else {
+                                    return d.parentId
+                                }
+                            }
+                        },
+                        {field: 'createTime', width: 200, align: 'center', title: '创建时间'},
+                        {field: 'updateTime', width: 200, align: 'center', title: '修改时间'},
+                        {templet: '#commodity-type-table-templet', width: 180, align: 'center', title: '操作'}
+                    ]
+                ],
+                done: function () {
+                    layer.closeAll('loading')
+                }
+            });
+        })
+    }
+
+    layui.use(['form', 'table', 'treetable'], function () {
+        const $ = layui.jquery,
+            form = layui.form,
+            table = layui.table,
+            treetable = layui.treetable;
+
+        loadTree();
+
+        let index;
+
+        // 监听菜单等级
+        form.on('radio(isMenu)', function (data) {
+            if (data.value === '0') {
+                $('#parentId').val('').attr('disabled', true).attr('lay-verify', '');
+                $('#parentId-update').val('').attr('disabled', true).attr('lay-verify', '');
+            } else {
+                $('#parentId').attr('disabled', false).attr('lay-verify', 'required');
+                $('#parentId-update').attr('disabled', false).attr('lay-verify', 'required');
+            }
+            layui.form.render('select');
+        });
+
+        // 添加商品类型
+        form.on('submit(add-submit)', function (data) {
+            if (data.field.sort <= 0 ) {
+                layer.msg('请注意，顺序至少应该大于0');
+                return false;
+            }
+
+            $.ajax({
+                url: '/admin/commodity/type/add',
+                type: 'post',
+                data: data.field,
+                dataType: 'json',
+                success: function (result) {
+                    loadTree();
+                    layer.msg(result.msg);
+                    layer.close(index);
+                }
+            });
+            return false;
+        });
+
+        // 更新商品类型
+        form.on('submit(update-submit)', function (data) {
+            $.ajax({
+                url: '/admin/commodity/type/update',
+                type: 'post',
+                dataType: 'json',
+                data: data.field,
+                success: function (result) {
+                    layer.msg(result.msg);
+                    layer.close(index);
+
+                    if (result.success) {
+                        loadTree();
+                    }
+                }
+            });
+            return false;
+        });
+
+
+        /**
+         * toolbar监听事件
+         */
+        table.on('toolbar(commodity-type-table)', function (obj) {
+            if (obj.event === 'add') {  // 监听添加操作
+                $.ajax({
+                    url: '/admin/commodity/type/list',
+                    type: 'post',
+                    datatype: 'json',
+                    success: function (result) {
+                        if (result.success) {
+                            $('#parentId').empty().append('<option value="">请选择</option>');
+                            $('.add-form-reset').click();
+                            $.each(result.data, function (index, object) {
+                                $('#parentId').append('<option value="' + object.id + '">' + object.name + '</option>');
+                            });
+                        }
+                        layui.form.render();
+                    }
+                });
+                index = layer.open({
+                    title: '添加商品类型',
+                    type: 1,
+                    shade: 0.2,
+                    shadeClose: true,
+                    area: ['100%', '100%'],
+                    content: $('#add-form'),
+                });
+                $(window).on("resize", function () {
+                    layer.full(index);
+                });
+            }
+        });
+
+        table.on('tool(commodity-type-table)', function (obj) {
+            const data = obj.data;
+            // 修改商品类型
+            if (obj.event === 'edit') {
+                $.ajax({
+                    url: '/admin/commodity/type/list',
+                    type: 'post',
+                    data: {
+                        id: data.id,
+                    },
+                    datatype: 'json',
+                    success: function (result) {
+
+                        const parentId_update = $('#parentId-update');
+
+                        if (result.success) {
+                            parentId_update.empty().append('<option value="">请选择</option>');
+                            $('.update-form-reset').click();
+                            form.val('update-form', data);
+                            $.each(result.data, function (index, object) {
+                                parentId_update.append('<option value="' + object.id + '">' + object.name + '</option>');
+                            });
+                        }
+                        if (data.parentId !== 7) {
+                            parentId_update.val(data.parentId).click();
+                        }
+                        layui.form.render();
+                    }
+                });
+
+                if (data.parentId === 7) {
+                    $('.no-show').css('display', 'none')
+                } else {
+                    $('.no-show').css('display', 'block')
+                }
+
+                index = layer.open({
+                    title: '编辑商品类型',
+                    type: 1,
+                    shade: 0.2,
+                    shadeClose: true,
+                    area: ['100%', '100%'],
+                    content: $('#update-form'),
+                });
+
+                if (data.isMenu === 0) {
+                    $('#parentId-update').val('').attr('disabled', true);
+                } else {
+                    $('#parentId-update').attr('disabled', false);
+                }
+                layui.form.render();
+
+                $(window).on("resize", function () {
+                    layer.full(index);
+                })
+            } else if (obj.event === 'delete') {
+                // 删除商品类型数据
+                layer.confirm('真的删除行么？', function (index) {
+                    $.ajax({
+                        url: '/admin/commodity/type/delete',
+                        type: 'post',
+                        data: {
+                            id: data.id
+                        },
+                        dataType: 'json',
+                        success: function (result) {
+                            layer.close(index);
+                            layer.msg(result.msg);
+                            loadTree();
+                        }
+                    });
+                });
+            } else if (obj.event === 'on') {
+                // 启用商品类型
+                layer.confirm('是否确定要启用？', function (index) {
+                    $.ajax({
+                        url: '/admin/commodity/type/on',
+                        type: 'post',
+                        data: {
+                            id: data.id
+                        },
+                        dataType: 'json',
+                        success: function (result) {
+                            layer.msg(result.msg);
+                            layer.close(index);
+                            loadTree();
+                        }
+                    });
+                });
+            } else if (obj.event === 'off') {
+                // 禁用商品类型
+                layer.confirm('是否确定要禁用？', function (index) {
+                    $.ajax({
+                        url: '/admin/commodity/type/off',
+                        type: 'post',
+                        data: {
+                            id: data.id
+                        },
+                        dataType: 'json',
+                        success: function (result) {
+                            layer.close(index);
+                            layer.msg(result.msg);
+                            loadTree();
+                        }
+                    });
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>

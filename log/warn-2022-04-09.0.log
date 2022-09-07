@@ -1,0 +1,95 @@
+2022-04-09 08:13:04.392 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 08:13:06.852 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 08:13:06.852 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 10:30:04.648 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 10:30:06.476 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 10:30:06.477 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 10:31:56.797 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 10:31:58.461 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 10:31:58.461 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 10:34:11.363 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 10:34:13.288 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 10:34:13.289 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 10:37:58.516 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 10:38:00.855 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 10:38:00.855 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 10:41:02.688 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 10:41:05.065 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 10:41:05.065 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 10:41:17.149 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 10:41:19.177 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 10:41:19.177 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 10:41:29.042 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 10:41:30.918 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 10:41:30.918 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 10:45:51.644 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 10:45:53.393 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 10:45:53.393 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 10:46:42.297 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 10:46:44.447 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 10:46:44.448 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 10:51:13.023 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 10:51:14.807 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 10:51:14.807 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 10:51:45.871 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 10:51:47.703 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 10:51:47.703 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 10:52:34.139 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 10:52:35.969 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 10:52:35.969 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 10:53:23.637 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 10:53:25.540 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 10:53:25.540 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 10:54:11.746 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 10:54:13.499 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 10:54:13.499 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 10:55:11.033 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 10:55:12.774 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 10:55:12.774 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 10:59:46.547 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 10:59:48.230 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 10:59:48.230 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 11:03:25.676 [http-nio-8080-exec-5] WARN  com.alibaba.druid.pool.DruidAbstractDataSource - discard long time none received connection. , jdbcUrl : jdbc:mysql://localhost:3306/magicbazaar?useUnicode=true&characterEncoding=utf-8&serverTimeZone=UTC, version : 1.2.8, lastPacketReceivedIdleMillis : 100056
+2022-04-09 11:05:26.459 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 11:05:28.239 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 11:05:28.239 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 11:12:25.098 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 11:12:26.788 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 11:12:26.789 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 11:15:37.458 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 11:15:39.394 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 11:15:39.395 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 11:19:46.503 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 11:19:48.314 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 11:19:48.314 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 11:21:16.173 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 11:21:17.981 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 11:21:17.981 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 11:22:47.932 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 11:22:49.765 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 11:22:49.765 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 11:27:15.943 [http-nio-8080-exec-9] WARN  com.alibaba.druid.pool.DruidAbstractDataSource - discard long time none received connection. , jdbcUrl : jdbc:mysql://localhost:3306/magicbazaar?useUnicode=true&characterEncoding=utf-8&serverTimeZone=UTC, version : 1.2.8, lastPacketReceivedIdleMillis : 262141
+2022-04-09 12:08:36.686 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 12:08:38.517 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 12:08:38.517 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 12:57:14.073 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 12:57:15.950 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 12:57:15.950 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 13:09:35.645 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 13:09:37.962 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 13:09:37.963 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 13:10:21.686 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 13:10:23.419 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 13:10:23.420 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 13:11:58.179 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 13:11:59.938 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 13:11:59.938 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 13:20:22.704 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 13:20:24.611 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 13:20:24.611 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 13:20:40.031 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 13:20:41.796 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 13:20:41.796 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2022-04-09 13:22:44.204 [main] WARN  o.s.boot.autoconfigure.AutoConfigurationPackages - @EnableAutoConfiguration was declared on a class in the default package. Automatic @Repository and @Entity scanning is not enabled.
+2022-04-09 13:22:45.971 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - Can not find table primary key in Class: "com.a243.magicbazaar.dao.dto.Cart".
+2022-04-09 13:22:45.971 [main] WARN  c.b.mybatisplus.core.injector.DefaultSqlInjector - class com.a243.magicbazaar.dao.dto.Cart ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.

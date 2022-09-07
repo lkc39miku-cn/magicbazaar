@@ -1,0 +1,16 @@
+2022-04-12 07:59:20.557 [http-nio-8080-exec-5] ERROR com.a243.magicbazaar.config.log.LogAspect - ===============log start===============
+2022-04-12 07:59:20.565 [http-nio-8080-exec-5] ERROR com.a243.magicbazaar.config.log.LogAspect - verify:error
+2022-04-12 07:59:20.565 [http-nio-8080-exec-5] ERROR com.a243.magicbazaar.config.log.LogAspect - time:2022-04-12T07:59:20.565196500
+2022-04-12 07:59:20.565 [http-nio-8080-exec-5] ERROR com.a243.magicbazaar.config.log.LogAspect - error:/ by zero
+2022-04-12 07:59:20.565 [http-nio-8080-exec-5] ERROR com.a243.magicbazaar.config.log.LogAspect - error info:class java.lang.ArithmeticException
+2022-04-12 07:59:20.565 [http-nio-8080-exec-5] ERROR com.a243.magicbazaar.config.log.LogAspect - method:com.a243.magicbazaar.controller.reception.ReCommodityController.stars()
+2022-04-12 07:59:20.589 [http-nio-8080-exec-5] ERROR com.a243.magicbazaar.config.log.LogAspect - params:[38]
+2022-04-12 07:59:20.589 [http-nio-8080-exec-5] ERROR com.a243.magicbazaar.config.log.LogAspect - ===============log end===============
+2022-04-12 08:50:16.833 [http-nio-8080-exec-7] ERROR com.a243.magicbazaar.config.log.LogAspect - ===============log start===============
+2022-04-12 08:50:16.833 [http-nio-8080-exec-7] ERROR com.a243.magicbazaar.config.log.LogAspect - verify:error
+2022-04-12 08:50:16.833 [http-nio-8080-exec-7] ERROR com.a243.magicbazaar.config.log.LogAspect - time:2022-04-12T08:50:16.833889900
+2022-04-12 08:50:16.835 [http-nio-8080-exec-7] ERROR com.a243.magicbazaar.config.log.LogAspect - error:Cannot invoke "com.a243.magicbazaar.dao.entity.OrderInfo.setPublishStatus(java.lang.Integer)" because "orderInfo" is null
+2022-04-12 08:50:16.835 [http-nio-8080-exec-7] ERROR com.a243.magicbazaar.config.log.LogAspect - error info:class java.lang.NullPointerException
+2022-04-12 08:50:16.835 [http-nio-8080-exec-7] ERROR com.a243.magicbazaar.config.log.LogAspect - method:com.a243.magicbazaar.controller.reception.ReOrderController.deleteOne()
+2022-04-12 08:50:16.835 [http-nio-8080-exec-7] ERROR com.a243.magicbazaar.config.log.LogAspect - params:[{"id":""}]
+2022-04-12 08:50:16.835 [http-nio-8080-exec-7] ERROR com.a243.magicbazaar.config.log.LogAspect - ===============log end===============

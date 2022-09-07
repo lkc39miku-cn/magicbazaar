@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>菜单信息</title>
+    <meta content="webkit" name="renderer">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+    <link href="/lib/layui-v2.6.3/css/layui.css" media="all" rel="stylesheet">
+    <link href="/css/public.css" media="all" rel="stylesheet">
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+
+        <script id="menu_table_tool" type="text/html">
+            <div class="layui-btn-container">
+                <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加</button>
+            </div>
+        </script>
+
+        <table class="layui-hide" id="menu_table" lay-filter="menu_table"></table>
+
+        <script id="menu_table_templet" type="text/html">
+            <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
+            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+        </script>
+
+    </div>
+</div>
+
+<script src="/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+<script charset="utf-8" src="/lib/layui-v2.6.3/layui.js"></script>
+<script charset="utf-8" src="/js/lay-config.js?v=1.0.4"></script>
+<script>
+    layui.use(['form', 'table', 'treetable'], function () {
+        const $ = layui.jquery,
+            form = layui.form,
+            table = layui.table,
+            treetable = layui.treetable;
+
+        // 渲染表格
+        layer.load(2);
+        treetable.render({
+            treeColIndex: 2,
+            treeSpid: 0,
+            url: '/admin/menu/list',
+            where: {
+                tree: true
+            },
+            toolbar: '#menu_table_tool',
+            treeIdName: 'id',
+            treePidName: 'parentId',
+            elem: '#menu_table',
+            page: false,
+            cols: [
+                [
+                    {type: 'checkbox'},
+                    {field: 'id', width: 50, title: 'ID'},
+                    {field: 'name', minWidth: 200, title: '地址名称'},
+                    {field: 'parentId', minWidth: 200, title: '父级ID'},
+                    {field: 'createTime', sort: true, width: 200, align: 'center', title: '创建时间'},
+                    {field: 'updateTime, sort: true', width: 200, align: 'center', title: '修改时间'},
+                    {templet: '#menu_table_templet', width: 180, align: 'center', title: '操作'}
+                ]
+            ],
+            done: function () {
+                layer.closeAll('loading')
+            }
+        });
+
+        let index;
+
+        // 添加菜单
+        form.on('submit(add-submit)', function (data) {
+            $.ajax({
+                url: '/admin/commodity/type/add',
+                type: 'post',
+                data: data.field,
+                dataType: 'json',
+                success: function (result) {
+                    layer.msg(result.msg);
+                    layer.close(index);
+                }
+            });
+            return false;
+        });
+
+        // 更新菜单
+        form.on('submit(update-submit)', function (data) {
+            $.ajax({
+                url: '/admin/commodity/type/update',
+                type: 'post',
+                dataType: 'json',
+                data: data.field,
+                success: function (result) {
+                    layer.msg(result.msg);
+                    layer.close(index);
+                }
+            });
+            return false;
+        });
+
+
+        /**
+         * toolbar监听事件
+         */
+        table.on('toolbar(commodity-type-table)', function (obj) {
+            if (obj.event === 'add') {  // 监听添加操作
+                $.ajax({
+                    url: '/admin/commodity/type/list',
+                    type: 'post',
+                    datatype: 'json',
+                    success: function (result) {
+                        if (result.success) {
+                            $('#parentId').empty().append('<option value="">请选择</option>');
+                            $('.add-form-reset').click();
+                            $.each(result.data, function (index, object) {
+                                $('#parentId').append('<option value="' + object.id + '">' + object.name + '</option>');
+                            });
+                        }
+                        layui.form.render();
+                    }
+                });
+                index = layer.open({
+                    title: '添加商品类型',
+                    type: 1,
+                    shade: 0.2,
+                    shadeClose: true,
+                    area: ['100%', '100%'],
+                    content: $('#add-form'),
+                });
+                $(window).on("resize", function () {
+                    layer.full(index);
+                });
+            }
+        });
+
+        table.on('tool(commodity-type-table)', function (obj) {
+            const data = obj.data;
+            // 修改商品类型
+            if (obj.event === 'edit') {
+                $.ajax({
+                    url: '/admin/commodity/type/list',
+                    type: 'post',
+                    data: {
+                        id: data.id
+                    },
+                    datatype: 'json',
+                    success: function (result) {
+
+                        const parentId_update = $('#parentId-update');
+
+                        if (result.success) {
+                            parentId_update.empty().append('<option value="">请选择</option>');
+                            $('.update-form-reset').click();
+                            form.val('update-form', data);
+                            $.each(result.data, function (index, object) {
+                                parentId_update.append('<option value="' + object.id + '">' + object.name + '</option>');
+                            });
+                        }
+                        if (data.parentId !== 7) {
+                            parentId_update.next().find('<dd lay-value=' + data.parentId + '></dd>').click();
+                        }
+                        layui.form.render();
+                    }
+                });
+
+                index = layer.open({
+                    title: '编辑商品类型',
+                    type: 1,
+                    shade: 0.2,
+                    shadeClose: true,
+                    area: ['100%', '100%'],
+                    content: $('#update-form'),
+                });
+
+                if (data.isMenu === 0) {
+                    $('#parentId-update').val('').attr('disabled', true);
+                } else {
+                    $('#parentId-update').attr('disabled', false);
+                }
+                layui.form.render();
+
+                $(window).on("resize", function () {
+                    layer.full(index);
+                })
+            } else if (obj.event === 'delete') {
+                // 删除商品类型数据
+                layer.confirm('真的删除行么？', function (index) {
+                    $.ajax({
+                        url: '/admin/commodity/type/delete',
+                        type: 'post',
+                        data: {
+                            id: data.id
+                        },
+                        dataType: 'json',
+                        success: function (result) {
+                            layer.close(index);
+                            layer.msg(result.msg);
+                        }
+                    });
+                });
+            } else if (obj.event === 'on') {
+                // 启用商品类型
+                layer.confirm('是否确定要启用？', function (index) {
+                    $.ajax({
+                        url: '/admin/commodity/type/on',
+                        type: 'post',
+                        data: {
+                            id: data.id
+                        },
+                        dataType: 'json',
+                        success: function (result) {
+                            layer.msg(result.msg);
+                            layer.close(index);
+                        }
+                    });
+                });
+            } else if (obj.event === 'off') {
+                // 禁用商品类型
+                layer.confirm('是否确定要禁用？', function (index) {
+                    $.ajax({
+                        url: '/admin/commodity/type/off',
+                        type: 'post',
+                        data: {
+                            id: data.id
+                        },
+                        dataType: 'json',
+                        success: function (result) {
+                            layer.close(index);
+                            layer.msg(result.msg);
+                        }
+                    });
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>

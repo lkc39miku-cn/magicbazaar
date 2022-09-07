@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>订单信息</title>
+    <meta content="webkit" name="renderer">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+    <link href="/lib/layui-v2.6.3/css/layui.css" media="all" rel="stylesheet">
+    <link href="/css/public.css" media="all" rel="stylesheet">
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+
+        <fieldset class="table-search-fieldset">
+            <legend>搜索信息</legend>
+            <div style="margin: 10px 10px 10px 10px">
+                <form class="layui-form layui-form-pane">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">订单编号</label>
+                            <div class="layui-input-inline">
+                                <input autocomplete="off" class="layui-input" name="orderNumber" type="text">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">用户昵称</label>
+                            <div class="layui-input-inline">
+                                <input autocomplete="off" class="layui-input" name="nickname" type="text">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">支付方式</label>
+                            <div class="layui-input-block">
+                                <select name="paypalId">
+                                    <option value="">请选择</option>
+                                    <option value="1">支付宝</option>
+                                    <option value="2">paypal</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">订单状态</label>
+                            <div class="layui-input-inline">
+                                <select name="orderTypeId">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">显示状态</label>
+                            <div class="layui-input-block">
+                                <input autocomplete="off" class="layui-input" name="publishStatus" title="未显示"
+                                       type="radio" value="0">
+                                <input autocomplete="off" class="layui-input" name="publishStatus" title="显示中"
+                                       type="radio" value="1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">删除状态</label>
+                            <div class="layui-input-block">
+                                <input autocomplete="off" class="layui-input" name="deleteStatus" title="未删除"
+                                       type="radio" value="0">
+                                <input autocomplete="off" class="layui-input" name="deleteStatus" title="已删除"
+                                       type="radio" value="1">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button class="layui-btn layui-btn-primary layui-bg-blue" lay-filter="data-search-btn"
+                                    lay-submit="data-search-btn" type="submit"><i class="layui-icon"></i> 搜 索
+                            </button>
+                            <button class="layui-btn layui-btn-primary layui-bg-red data-reset-btn"
+                                    lay-filter="data-reset-btn" lay-submit type="reset"><i
+                                    class="layui-icon layui-icon-refresh"></i> 重 置
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+
+        <table class="layui-hide" id="order_table" lay-filter="order_table"></table>
+
+        <script id="order_templet" type="text/html">
+
+            {{# if(d.deleteStatus === 0) { }}
+
+                {{# if(d.orderTypeId === 8) { }}
+
+                <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="info">详情</a>
+
+                {{# } else if(d.orderTypeId === 9) { }}
+
+                <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="info">详情</a>
+                <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="fire">发货</a>
+
+                {{# } else if(d.orderTypeId === 10) { }}
+
+                <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="info">详情</a>
+
+                {{# if(d.publishStatus === 0) { }}
+                <a class="layui-btn layui-btn-xs layui-bg-orange" lay-event="on">显示</a>
+                {{# } else { }}
+                <a class="layui-btn layui-btn-xs layui-bg-orange" lay-event="off">不显示</a>
+                {{# } }}
+
+                <a class="layui-btn layui-btn-xs layui-bg-red" lay-event="delete">删除</a>
+
+                {{# } else if(d.orderTypeId === 15) { }}
+
+                <a class="layui-btn layui-btn-xs layui-btn-danger">已取消订单</a>
+
+                {{# if(d.publishStatus === 0) { }}
+                <a class="layui-btn layui-btn-xs layui-bg-orange" lay-event="on">显示</a>
+                {{# } else { }}
+                <a class="layui-btn layui-btn-xs layui-bg-orange" lay-event="off">不显示</a>
+                {{# } }}
+
+                <a class="layui-btn layui-btn-xs layui-bg-red" lay-event="delete">删除</a>
+
+                {{# } else if(d.orderTypeId === 16) { }}
+
+                <a class="layui-btn layui-btn-xs layui-btn-danger">订单已超时</a>
+
+                {{# if(d.publishStatus === 0) { }}
+                <a class="layui-btn layui-btn-xs layui-bg-orange" lay-event="on">显示</a>
+                {{# } else { }}
+                <a class="layui-btn layui-btn-xs layui-bg-orange" lay-event="off">不显示</a>
+                {{# } }}
+
+                <a class="layui-btn layui-btn-xs layui-bg-red" lay-event="delete">删除</a>
+
+                {{# } }}
+
+            {{# } else { }}
+
+            <a class="layui-btn layui-btn-xs layui-bg-blue">已删除</a>
+
+            {{# } }}
+        </script>
+
+    </div>
+</div>
+<div class="order-info-div" hidden>
+    <table class="layui-hide" id="order_info_table" lay-filter="order_info_table"></table>
+    <script id="order_info_templet" type="text/html">
+        {{# if(d.deleteStatus === 0) { }}
+
+            {{# if(d.orderTypeId === 1) { }}
+
+            <a class="layui-btn layui-btn-xs layui-bg-gray">待付款</a>
+
+            {{# } else if(d.orderTypeId === 2) {  }}
+
+            <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="fire">发货</a>
+
+            {{# } else if(d.orderTypeId === 3) { }}
+
+            <a class="layui-btn layui-btn-xs layui-bg-blue">待用户收货</a>
+
+            {{# } else if(d.orderTypeId === 4) { }}
+
+            <a class="layui-btn layui-btn-xs layui-bg-blue">待用户评价</a>
+
+            {{# } else if(d.orderTypeId === 5) { }}
+
+                {{# if(d.publishStatus === 0) { }}
+                <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="on">显示</a>
+                {{# } else { }}
+                <a class="layui-btn layui-btn-xs layui-bg-orange" lay-event="off">不显示</a>
+                {{# } }}
+
+                <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
+
+            {{# } else if(d.orderTypeId === 6 || d.orderTypeId === 7) { }}
+
+            <a class="layui-btn layui-btn-xs layui-btn-danger">订单纠纷中</a>
+
+            {{# } else if(d.orderTypeId === 11) { }}
+
+            <a class="layui-btn layui-btn-xs layui-btn-danger">已退款</a>
+
+            {{# } else if(d.orderTypeId === 13) { }}
+
+             <a class="layui-btn layui-btn-xs layui-btn-danger">已拒绝退款</a>
+
+            {{# } else if(d.orderTypeId === 14) { }}
+
+            <a class="layui-btn layui-btn-xs layui-btn-danger">已拒绝换货</a>
+
+            {{# } else if(d.orderTypeId === 15) { }}
+
+            <a class="layui-btn layui-btn-xs layui-btn-danger">已取消订单</a>
+
+            {{# } else if(d.orderTypeId === 16) { }}
+
+            <a class="layui-btn layui-btn-xs layui-btn-danger">订单已超时</a>
+
+            {{# } }}
+
+        {{# } else { }}
+
+        <a class="layui-btn layui-btn-xs layui-btn-danger">已删除</a>
+
+        {{# } }}
+    </script>
+</div>
+<script src="/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+<script charset="utf-8" src="/lib/layui-v2.6.3/layui.js"></script>
+<script charset="utf-8" src="/js/lay-config.js?v=1.0.4"></script>
+<script>
+    $(function () {
+        $.ajax({
+            type: 'post',
+            url: '/admin/order/type/list',
+            dataType: 'json',
+            success: function (result) {
+                $('select[name="orderTypeId"]').append('<option value="">请选择</option>');
+                $.each(result.data, function (i, object) {
+                    $('select[name="orderTypeId"]').append('<option value="' + object.id + '">' + object.name + '</option>');
+                })
+                layui.form.render();
+            }
+        })
+    })
+
+    layui.use(['form', 'table'], function () {
+        const $ = layui.jquery,
+            form = layui.form,
+            table = layui.table;
+
+        table.render({
+            elem: '#order_table',
+            id: 'order_table',
+            url: '/admin/order/list',
+            toolbar: '#',
+            method: 'post',
+            defaultToolbar: ['filter', 'exports', 'print', {
+                title: '提示',
+                layEvent: 'LAYTABLE_TIPS',
+                icon: 'layui-icon-tips'
+            }],
+            request: {
+                pageName: 'pageParam.page',
+                limitName: 'pageParam.pageSize'
+            },
+            cols: [
+                [
+                    {field: 'id', width: 80, title: 'ID', sort: true, fixed: 'left'},
+                    {field: 'orderNumber', sort: true, width: 200, title: '订单编号'},
+                    {field: 'userName', width: 180, title: '用户昵称'},
+                    {field: 'paypalName', width: 120, title: '支付方式'},
+                    {field: 'money', width: 120, sort: true, title: '价格', templet: function (d) {
+                            return d.money + '元';
+                        }},
+                    {
+                        field: 'orderTypeName', width: 120, title: '订单状态', align: 'center',  templet: function (d) {
+                            if (d.orderTypeId === 8) {
+                                return '<span class="layui-badge layui-bg-red">' + d.orderTypeName + '</span>';
+                            }
+                            if (d.orderTypeId === 9) {
+                                return '<span class="layui-badge layui-bg-orange">' + d.orderTypeName + '</span>';
+                            }
+                            if (d.orderTypeId === 10) {
+                                return '<span class="layui-badge layui-bg-blue">' + d.orderTypeName + '</span>';
+                            } else if (d.orderTypeId === 15) {
+                                return '<span class="layui-badge layui-bg-blue">' + d.orderTypeName + '</span>';
+                            } else if (d.orderTypeId === 16) {
+                                return '<span class="layui-badge layui-bg-blue">' + d.orderTypeName + '</span>';
+                            }
+                        }
+                    },
+                    {
+                        field: 'publishStatus', width: 120, title: '显示状态', align: 'center', templet: function (d) {
+                            if (d.publishStatus === 0) {
+                                return '<span class="layui-badge layui-bg-red">未显示</span>';
+                            }
+                            if (d.publishStatus === 1) {
+                                return '<span class="layui-badge layui-bg-blue">已显示</span>';
+                            }
+                        }
+                    },
+                    {
+                        field: 'deleteStatus', width: 120, align: 'center', title: '删除状态', templet: function (d) {
+                            if (d.deleteStatus === 0) {
+                                return '<span class="layui-badge layui-bg-blue">未删除</span>';
+                            }
+                            if (d.deleteStatus === 1) {
+                                return '<span class="layui-badge layui-bg-red">已删除</span>';
+                            }
+                        }
+                    },
+                    {field: 'createTime', width: 200, sort: true, align: 'center', title: '创建时间'},
+                    {field: 'updateTime', width: 200, sort: true, align: 'center', title: '修改时间'},
+                    {title: '操作', minWidth: 240, toolbar: '#order_templet', align: "center", fixed: 'right'}
+                ]
+            ],
+            limits: [10, 15, 20, 25, 50, 100],
+            limit: 15,
+            page: true,
+            skin: 'line'
+        });
+
+        // 监听搜索操作
+        form.on('submit(data-search-btn)', function (data) {
+            //执行搜索重载
+            table.reload('order_table', {
+                page: {
+                    curr: 1
+                }
+                , where: data.field
+            })
+            return false;
+        });
+
+        form.on('submit(data-reset-btn)', function () {
+            //执行搜索重载
+            table.reload('order_table', {
+                page: {
+                    curr: 1
+                },
+                where: {}
+            });
+
+            table.reload('order_info_table', {
+                page: {
+                    curr: 1
+                },
+                where: {
+                    orderId: value
+                }
+            });
+        });
+
+        table.on('tool(order_table)', function (obj) {
+            const data = obj.data;
+            if (obj.event === 'info') {
+                value = data.id;
+                loadTable();
+                const index = layer.open({
+                    title: '订单详情',
+                    type: 1,
+                    shade: 0.2,
+                    shadeClose: true,
+                    area: ['100%', '100%'],
+                    content: $('.order-info-div'),
+                });
+                $(window).on("resize", function () {
+                    layer.full(index);
+                });
+            } else if (obj.event === 'fire') {
+                layer.confirm('注意：使用该按钮，则会对该订单中已支付的订单进行发货，确定要发货该订单吗？', function (index) {
+                    $.ajax({
+                        url: '/admin/order/fire',
+                        type: 'post',
+                        data: {
+                            id: data.id
+                        },
+                        dataType: 'json',
+                        success: function (result) {
+                            layer.msg(result.msg);
+                            if (result.success) {
+                                $('.data-reset-btn').click();
+                            }
+                            layer.close(index);
+                        }
+                    });
+                });
+            } else if (obj.event === 'on') {
+                layer.confirm('其下子订单将也会显示，如有需要，请单独进行隐藏，确定要显示该订单吗？', function (index) {
+                    $.ajax({
+                        url: '/admin/order/on',
+                        type: 'post',
+                        data: {
+                            id: data.id
+                        },
+                        dataType: 'json',
+                        success: function (result) {
+                            layer.msg(result.msg);
+                            if (result.success) {
+                                $('.data-reset-btn').click();
+                            }
+                            layer.close(index);
+                        }
+                    });
+                });
+            } else if (obj.event === 'off') {
+                layer.confirm('其下订单也将被隐藏，确定要不显示该订单吗？', function (index) {
+                    $.ajax({
+                        url: '/admin/order/off',
+                        type: 'post',
+                        data: {
+                            id: data.id
+                        },
+                        dataType: 'json',
+                        success: function (result) {
+                            layer.msg(result.msg);
+                            if (result.success) {
+                                $('.data-reset-btn').click();
+                            }
+                            layer.close(index);
+                        }
+                    });
+                });
+            } else if (obj.event === 'delete') {
+                layer.confirm('其下子订单数据也将被删除，真的删除该数据么？', function (index) {
+                    $.ajax({
+                        url: '/admin/order/delete',
+                        type: 'post',
+                        data: {
+                            id: data.id
+                        },
+                        dataType: 'json',
+                        success: function (result) {
+                            layer.msg(result.msg);
+                            if (result.success) {
+                                $('.data-reset-btn').click();
+                            }
+                            layer.close(index);
+                        }
+                    });
+                });
+            }
+        });
+    });
+</script>
+<script>
+    let value;
+
+    function loadTable() {
+        layui.use(['form', 'table'], function () {
+            const $ = layui.jquery,
+                form = layui.form,
+                table = layui.table;
+
+            table.render({
+                elem: '#order_info_table',
+                id: 'order_info_table',
+                url: '/admin/order/info/list',
+                method: 'post',
+                toolbar: '#',
+                where: {
+                    orderId: value
+                },
+                defaultToolbar: ['filter', 'exports', 'print', {
+                    title: '提示',
+                    layEvent: 'LAYTABLE_TIPS',
+                    icon: 'layui-icon-tips'
+                }],
+                request: {
+                    pageName: 'pageParam.page',
+                    limitName: 'pageParam.pageSize'
+                },
+                cols: [
+                    [
+                        {field: 'id', width: 80, title: 'ID', sort: true, fixed: 'left'},
+                        {field: 'orderId', width: 120, title: '订单ID'},
+                        {field: 'commodityName', width: 180, title: '商品名称'},
+                        {field: 'price', width: 120, sort: true, title: '价格', templet: function (d) {
+                                return d.price + '元';
+                            }},
+                        {field: 'number', sort: true, width: 120, title: '数量'},
+                        {field: 'allPrice', sort: true, width: 120, title: '总价', templet: function (d) {
+                                return d.allPrice + '元';
+                            }},
+                        {
+                            field: 'orderTypeName', width: 120, title: '订单状态', templet: function (d) {
+                                if (d.orderTypeId === 1) {
+                                    return '<span class="layui-badge layui-bg-gray">待付款</span>';
+                                }
+                                if (d.orderTypeId === 2) {
+                                    return '<span class="layui-badge layui-btn-danger">待发货</span>';
+                                }
+                                if (d.orderTypeId === 3) {
+                                    return '<span class="layui-badge layui-bg-orange">待收货</span>';
+                                }
+                                if (d.orderTypeId === 4) {
+                                    return '<span class="layui-badge layui-bg-blue">待评价</span>';
+                                }
+                                if (d.orderTypeId === 5) {
+                                    return '<span class="layui-badge layui-bg-blue">已完成</span>';
+                                }
+                                if (d.orderTypeId === 6) {
+                                    return '<span class="layui-badge layui-bg-red">换货中</span>';
+                                }
+                                if (d.orderTypeId === 7) {
+                                    return '<span class="layui-badge layui-bg-red">退货中</span>';
+                                }else if (d.orderTypeId === 11) {
+                                    return '<span class="layui-badge layui-btn-danger">已退款 ' + d.allPrice + '元</span>';
+                                }else if (d.orderTypeId === 13) {
+                                    return '<span class="layui-badge layui-btn-danger">已拒绝退款 ' + d.allPrice + '元</span>';
+                                }else if (d.orderTypeId === 14) {
+                                    return '<span class="layui-badge layui-btn-danger">已拒绝换货</span>';
+                                } else if (d.orderTypeId === 15) {
+                                    return '<span class="layui-badge layui-bg-blue">已取消</span>';
+                                } else if (d.orderTypeId === 16) {
+                                    return '<span class="layui-badge layui-bg-blue">已超时</span>';
+                                }else {
+                                    return '<span class="layui-badge layui-btn-danger">已同意换货</span>';
+                                }
+                            }
+                        },
+                        {field: 'userName', width: 200, title: '收货人昵称'},
+                        {field: 'userPhone', width: 200, title: '收货人手机号'},
+                        {field: 'userAddressName', width: 200, title: '地址'},
+                        {
+                            field: 'publishStatus', width: 120, title: '显示状态', templet: function (d) {
+                                if (d.publishStatus === 0) {
+                                    return '<span class="layui-badge layui-bg-red">未显示</span>';
+                                }
+                                if (d.publishStatus === 1) {
+                                    return '<span class="layui-badge layui-bg-blue">已显示</span>';
+                                }
+                            }
+                        },
+                        {
+                            field: 'deleteStatus', width: 120, align: 'center', title: '删除状态', templet: function (d) {
+                                if (d.deleteStatus === 0) {
+                                    return '<span class="layui-badge layui-bg-blue">未删除</span>';
+                                }
+                                if (d.deleteStatus === 1) {
+                                    return '<span class="layui-badge layui-bg-red">已删除</span>';
+                                }
+                            }
+                        },
+                        {field: 'createTime', sort: true, width: 200, align: 'center', title: '创建时间'},
+                        {field: 'updateTime', sort: true, width: 200, align: 'center', title: '修改时间'},
+                        {title: '操作', minWidth: 240, toolbar: '#order_info_templet', align: "center", fixed: 'right'}
+                    ]
+                ],
+                limits: [10, 15, 20, 25, 50, 100],
+                limit: 15,
+                page: true,
+                skin: 'line'
+            });
+
+            table.on('tool(order_info_table)', function (obj) {
+                const data = obj.data;
+                if (obj.event === 'on') {
+                    layer.confirm('确定要显示该订单吗？', function (index) {
+                        $.ajax({
+                            url: '/admin/order/info/on',
+                            type: 'post',
+                            data: {
+                                id: data.id
+                            },
+                            dataType: 'json',
+                            success: function (result) {
+                                layer.msg(result.msg);
+                                if (result.success) {
+                                    $('.data-reset-btn').click();
+                                }
+                                layer.close(index);
+                            }
+                        });
+                    });
+                } else if (obj.event === 'off') {
+                    layer.confirm('确定要不显示该订单吗？', function (index) {
+                        $.ajax({
+                            url: '/admin/order/info/off',
+                            type: 'post',
+                            data: {
+                                id: data.id
+                            },
+                            dataType: 'json',
+                            success: function (result) {
+                                layer.msg(result.msg);
+                                if (result.success) {
+                                    $('.data-reset-btn').click();
+                                }
+                                layer.close(index);
+                            }
+                        });
+                    });
+                } else if (obj.event === 'delete') {
+                    layer.confirm('真的删除该数据么？', function (index) {
+                        $.ajax({
+                            url: '/admin/order/info/delete',
+                            type: 'post',
+                            data: {
+                                id: data.id
+                            },
+                            dataType: 'json',
+                            success: function (result) {
+                                layer.msg(result.msg);
+                                if (result.success) {
+                                    $('.data-reset-btn').click();
+                                }
+                                layer.close(index);
+                            }
+                        });
+                    });
+                } else if (obj.event === 'fire') {
+                    layer.confirm('真的发货该商品么？', function (index) {
+                        $.ajax({
+                            url: '/admin/order/info/fire',
+                            type: 'post',
+                            data: {
+                                id: data.id
+                            },
+                            dataType: 'json',
+                            success: function (result) {
+                                layer.msg(result.msg);
+                                if (result.success) {
+                                    $('.data-reset-btn').click();
+                                }
+                                layer.close(index);
+                            }
+                        });
+                    });
+                }
+            });
+        });
+    }
+</script>
+</body>
+</html>

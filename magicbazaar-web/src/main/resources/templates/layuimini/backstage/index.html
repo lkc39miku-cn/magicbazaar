@@ -1,0 +1,460 @@
+    <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>首页三</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="/lib/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" href="/css/public.css" media="all">
+    <style>
+        .top-panel {
+            border: 1px solid #eceff9;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .top-panel > .layui-card-body{
+            height: 60px;
+        }
+        .top-panel-number{
+            line-height:60px;
+            font-size: 30px;
+            border-right:1px solid #eceff9;
+        }
+        .top-panel-tips{
+            line-height:30px;
+            font-size: 12px
+        }
+    </style>
+</head>
+<body>
+<!--<div class="layuimini-container">-->
+<div class="layuimini-main">
+
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12 layui-col-md3">
+
+            <div class="layui-card top-panel">
+                <div class="layui-card-header">注册人数</div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-col-space5">
+                        <div class="layui-col-xs9 layui-col-md9 top-panel-number register-user">
+
+                        </div>
+                        <div class="layui-col-xs3 layui-col-md3 top-panel-tips">
+                            比昨天 <a style="color: #1aa094" class="register-user-y"></a><br>
+                            比七日 <a style="color: #bd3004" class="register-user-p"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="layui-col-xs12 layui-col-md3">
+
+            <div class="layui-card top-panel">
+                <div class="layui-card-header">创建订单</div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-col-space5">
+                        <div class="layui-col-xs9 layui-col-md9 top-panel-number register-order">
+
+                        </div>
+                        <div class="layui-col-xs3 layui-col-md3 top-panel-tips">
+                            比昨天 <a style="color: #1aa094" class="register-order-y"></a><br>
+                            比七日 <a style="color: #bd3004" class="register-order-p"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="layui-col-xs12 layui-col-md3">
+
+            <div class="layui-card top-panel">
+                <div class="layui-card-header">提交纠纷</div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-col-space5">
+                        <div class="layui-col-xs9 layui-col-md9 top-panel-number register-dispute">
+
+                        </div>
+                        <div class="layui-col-xs3 layui-col-md3 top-panel-tips">
+                            比昨天 <a style="color: #1aa094" class="register-dispute-y"></a><br>
+                            比七日 <a style="color: #bd3004" class="register-dispute-p"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="layui-col-xs12 layui-col-md3">
+
+            <div class="layui-card top-panel">
+                <div class="layui-card-header">今日利润</div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-col-space5">
+                        <div class="layui-col-xs7 layui-col-md7 top-panel-number register-money">
+
+                        </div>
+                        <div class="layui-col-xs5 layui-col-md5 top-panel-tips">
+                            比昨天 <a style="color: #1aa094" class="register-money-y"></a><br>
+                            比七日 <a style="color: #bd3004" class="register-money-p"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12 layui-col-md9">
+            <div id="echarts-records" style="background-color:#ffffff;min-height:400px;padding: 10px"></div>
+        </div>
+        <div class="layui-col-xs12 layui-col-md3">
+            <div class="layui-form">
+                <div class="layui-form-item" style="padding: 0 100px">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">日期范围</label>
+                        <div class="layui-inline" id="test-range">
+                            <div class="layui-input-inline">
+                                <input type="text" id="startDate" class="layui-input" placeholder="开始日期">
+                            </div>
+                            <div class="layui-input-inline">
+                                <input type="text" id="endDate" class="layui-input" placeholder="结束日期">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label"></label>
+                        <button type="submit" lay-filter="date" lay-submit="" class="layui-btn layui-bg-blue">搜索</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--</div>-->
+<script src="/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+<script src="/static/layui/layui.js" charset="utf-8"></script>
+<script src="/js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+<script>
+
+    $(function () {
+        layui.use('laydate', function(){
+            const laydate = layui.laydate;
+
+            laydate.render({
+                elem: '#test-range'
+                ,range: ['#startDate', '#endDate']
+                ,max: 0
+            });
+        });
+        loadUserCount();
+        loadOrderCount();
+        loadDisputeCount();
+        loadMoneyCount();
+
+
+        loadEchartOne(getStandardDateBeforeWeek(), getStandardDate());
+    })
+
+    function getStandardDate() {
+        const _date = new Date();
+        const year = _date.getFullYear();
+        let month = parseInt(parseInt(_date.getMonth()) + 1);
+        let day = _date.getDate();
+        if (month < 10) {
+            month = '0' + month;
+        }
+        if (day < 10) {
+            day = '0' + day;
+        }
+        return year + '-' + month + '-' + day;
+    }
+
+
+        function getStandardDateBeforeWeek(){
+        const _date = new Date();
+        _date.setDate(_date.getDate() - 7);
+        const year = _date.getFullYear();
+        let month = parseInt(parseInt(_date.getMonth()) + 1);
+        let day = _date.getDate();
+        if (month<10) {
+            month='0'+month;
+        }
+        if (day<10) {
+            day='0'+day;
+        }
+
+        const dateTemp = year + '-' + month + '-' + day;
+        _date.setDate(_date.getDate() + 7);
+        return dateTemp;
+    }
+
+    function loadUserCount() {
+        $.ajax({
+            type: 'post',
+            url: '/admin/user/counts',
+            success: function (result) {
+                if (result.success) {
+                    const obj = result.data.split(',');
+                    $('.register-user').text('今天' + obj[0] + '人');
+                    if (obj[1] >= 0) {
+                        $('.register-user-y').text('▲' + obj[1] + '人');
+                    } else {
+                        $('.register-user-y').text('▼' + obj[1] + '人');
+                    }
+                    if (obj[2] >= 0) {
+                        $('.register-user-p').text('▲' + obj[2] + '人');
+                    } else {
+                        $('.register-user-p').text('▼' + obj[2] + '人');
+                    }
+                }
+            }
+        })
+    }
+    function loadOrderCount() {
+        $.ajax({
+            type: 'post',
+            url: '/admin/order/counts',
+            success: function (result) {
+                if (result.success) {
+                    const obj = result.data.split(',');
+                    $('.register-order').text('今天' + obj[0] + '条');
+                    if (obj[1] >= 0) {
+                        $('.register-order-y').text('▲' + obj[1] + '条');
+                    } else {
+                        $('.register-order-y').text('▼' + obj[1] + '条');
+                    }
+                    if (obj[2] >= 0) {
+                        $('.register-order-p').text('▲' + obj[2] + '条');
+                    } else {
+                        $('.register-order-p').text('▼' + obj[2] + '条');
+                    }
+                }
+            }
+        })
+    }
+    function loadDisputeCount() {
+        $.ajax({
+            type: 'post',
+            url: '/admin/commodity/dispute/counts',
+            success: function (result) {
+                if (result.success) {
+                    const obj = result.data.split(',');
+                    $('.register-dispute').text('今天' + obj[0] + '条');
+                    if (obj[1] >= 0) {
+                        $('.register-dispute-y').text('▲' + obj[1] + '条');
+                    } else {
+                        $('.register-dispute-y').text('▼' + obj[1] + '条');
+                    }
+                    if (obj[2] >= 0) {
+                        $('.register-dispute-p').text('▲' + obj[2] + '条');
+                    } else {
+                        $('.register-dispute-p').text('▼' + obj[2] + '条');
+                    }
+                }
+            }
+        })
+    }
+    function loadMoneyCount() {
+        $.ajax({
+            type: 'post',
+            url: '/admin/order/moneycounts',
+            success: function (result) {
+                if (result.success) {
+                    const obj = result.data.split(',');
+                    $('.register-money').text('今天' + obj[0] + '元');
+                    if (obj[1] >= 0) {
+                        $('.register-money-y').text('▲' + obj[1] + '元');
+                    } else {
+                        $('.register-money-y').text('▼' + obj[1] + '元');
+                    }
+                    if (obj[2] >= 0) {
+                        $('.register-money-p').text('▲' + obj[2] + '元');
+                    } else {
+                        $('.register-money-p').text('▼' + obj[2] + '元');
+                    }
+                }
+            }
+        })
+    }
+    layui.use('form', function () {
+        const form = layui.form;
+
+        form.on('submit(date)', function () {
+            const one = $('#startDate').val(), two = $('#endDate').val()
+            if (getdiffdate(one, two).length > 30) {
+                layer.msg('最多查看30天的统计');
+                return false;
+            }
+
+            loadEchartOne(one, two);
+            return false;
+        })
+    })
+    function getdiffdate(stime,etime){
+        const diffdate = [];
+        let i = 0;
+        while(stime<=etime){
+            diffdate[i] = stime;
+
+            const stime_ts = new Date(stime).getTime();
+
+            const next_date = stime_ts + (24 * 60 * 60 * 1000);
+
+            const next_dates_y = new Date(next_date).getFullYear() + '-';
+            const next_dates_m = (new Date(next_date).getMonth() + 1 < 10) ? '0' + (new Date(next_date).getMonth() + 1) + '-' : (new Date(next_date).getMonth() + 1) + '-';
+            const next_dates_d = (new Date(next_date).getDate() < 10) ? '0' + new Date(next_date).getDate() : new Date(next_date).getDate();
+
+            stime = next_dates_y+next_dates_m+next_dates_d;
+
+            i++;
+        }
+        return diffdate;
+    }
+    function getMoney(stime,etime) {
+        let data = [];
+
+        $.ajax({
+            type: 'post',
+            data: {
+                startTime: stime,
+                endTime: etime
+            },
+            async: false,
+            url: '/admin/commodity/getmoney',
+            dataType: 'json',
+            success: function (result) {
+                if (result.success) {
+                    data = result.data.substring(0, result.data.length - 1).split(',');
+                }
+                console.log(data)
+            }
+        })
+
+        return data;
+    }
+    function outMoney(stime,etime) {
+        let data = [];
+
+        $.ajax({
+            type: 'post',
+            data: {
+                startTime: stime,
+                endTime: etime
+            },
+            async: false,
+            url: '/admin/commodity/outmoney',
+            dataType: 'json',
+            success: function (result) {
+                if (result.success) {
+                    data = result.data.substring(0, result.data.length - 1).split(',');
+                }
+                console.log(data)
+            }
+        })
+
+        return data;
+    }
+    function moneyList(stime,etime) {
+        const data1 = getMoney(stime,etime);
+        const data2 = outMoney(stime,etime);
+
+        let data3 = [];
+
+        for (let i = 0; i < data1.length; i++) {
+            data3[i] = parseFloat(data1[i] - data2[i]);
+        }
+        console.log(data3)
+        return data3;
+    }
+
+    function loadEchartOne(one, two) {
+        layui.use(['layer', 'echarts'], function () {
+            const $ = layui.jquery,
+                layer = layui.layer,
+                echarts = layui.echarts;
+
+            /**
+             * 报表功能
+             */
+            const echartsRecords = echarts.init(document.getElementById('echarts-records'), 'walden');
+
+            const optionRecords = {
+                title: {
+                    text: '统计'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross',
+                        label: {
+                            backgroundColor: '#6a7985'
+                        }
+                    }
+                },
+                legend: {
+                    data: ['支出', '利润', '收入']
+                },
+                toolbox: {
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: [
+                    {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: getdiffdate(one, two)
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value'
+                    }
+                ],
+                series: [
+                    {
+                        name: '支出',
+                        type: 'line',
+                        stack: '总量',
+                        areaStyle: {},
+                        data: outMoney(one, two)
+                    },
+                    {
+                        name: '利润',
+                        type: 'line',
+                        stack: '总量',
+                        areaStyle: {},
+                        data: moneyList(one, two)
+                    },
+                    {
+                        name: '收入',
+                        type: 'line',
+                        stack: '总量',
+                        areaStyle: {},
+                        data: getMoney(one, two)
+                    }
+                ]
+            };
+            echartsRecords.setOption(optionRecords);
+
+            window.onresize = function () {
+                echartsRecords.resize();
+            }
+        })
+    }
+</script>
+</body>
+</html>

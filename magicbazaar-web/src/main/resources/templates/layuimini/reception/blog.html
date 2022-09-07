@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Aroma Shop - Blog</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/all.min.css" rel="stylesheet">
+    <link href="/css/themify-icons.css" rel="stylesheet">
+    <link href="/css/style1.css" rel="stylesheet">
+    <link href="/css/owl.theme.default.min.css" rel="stylesheet">
+    <link href="/css/owl.carousel.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/lib/layui-v2.6.3/css/layui.css" media="all" rel="stylesheet">
+    <style>
+        body, p {
+            margin: revert;
+        }
+        .author_img {
+            width: 100px;
+            height: 100px;
+        }
+        .order-card {
+            margin: 10px 0;
+        }
+        .order-card-header {
+            position: relative;
+            box-shadow: rgba(0, 0, 0, 0.16) 1px 2px 6px 1px;
+            padding: 2px 12px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .order-card-body {
+            position: relative;
+            box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px 1px;
+            padding: 2px 12px;
+        }
+        .show-body {
+            margin: 0 5px;
+            padding: 0 5px;
+            height: 22px;
+            line-height: 22px;
+            font-size: 12px;
+            border: none;
+            background: #1E9FFF;
+            color: white;
+        }
+        .categories_post {
+            width: 350px;
+            height: 240px;
+        }
+        .categories_post img {
+            width: 100%;
+            height: 100%;
+        }
+        .online {
+            height: 58px;
+            line-height: 58px;
+            border-radius: 50%;
+            position: fixed;
+            right: 20px;
+            bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<!--================ Start Header Menu Area =================-->
+<header class="header_area">
+    <div class="main_menu">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <a class="navbar-brand logo_h" href="/reception/index"><img alt="" src="/picture/logo.png"></a>
+                <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                        class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse"
+                        type="button">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
+                        <li class="nav-item"><a class="nav-link" href="/reception/url/index">主页</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/reception/url/category">购物</a></li>
+<!--                        <li class="nav-item"><a class="nav-link" href="/reception/url/stars">收藏</a></li>-->
+                        <li class="nav-item"><a class="nav-link" href="/reception/url/singleblog">订单</a></li>
+                    </ul>
+
+                    <ul class="nav-shop">
+                        <li class="nav-item">
+                            <button><a href="/reception/url/cart"><i class="ti-shopping-cart"></i><span
+                                    class="nav-shop__circle"></span></a></button>
+                        </li>
+                        <li class="nav-item user-center"><a class="button button-header" href="/reception/url/blog">个人中心</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+<!--================ End Header Menu Area =================-->
+
+
+<!-- ================ start banner area ================= -->
+<section class="blog-banner-area" id="blog" style="overflow: hidden">
+    <img alt="" src="/images/backtop.jpg" style="width: 100%;margin-top: -500px;opacity: 0.1;">
+    <div class="container h-100">
+        <div class="blog-banner">
+            <div class="text-center">
+                <h1>个人中心</h1>
+                <nav aria-label="breadcrumb" class="banner-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:">主页</a></li>
+                        <li aria-current="page" class="breadcrumb-item active">个人中心</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ================ end banner area ================= -->
+
+
+<!--================Blog Categorie Area =================-->
+<section class="blog_categorie_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-lg-4 mb-4 mb-lg-0">
+                <div class="categories_post">
+                    <img alt="post" class="card-img rounded-0" src="/images/96721607-2.jpg">
+                    <div class="categories_details">
+                        <div class="categories_text">
+                            <a href="javascript:">
+                                <h5>总订单</h5>
+                            </a>
+                            <div class="border_line"></div>
+                            <p class="orderNumber"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4 mb-4 mb-lg-0">
+                <div class="categories_post">
+                    <img alt="post" class="card-img rounded-0" src="/images/88947714-1.jpg">
+                    <div class="categories_details">
+                        <div class="categories_text">
+                            <a href="javascript:">
+                                <h5>累计消费</h5>
+                            </a>
+                            <div class="border_line"></div>
+                            <p class="orderPrice"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4 mb-4 mb-lg-0">
+                <div class="categories_post">
+                    <img alt="post" class="card-img rounded-0" src="/images/93473348-2.jpg">
+                    <div class="categories_details">
+                        <div class="categories_text">
+                            <a href="javascript:">
+                                <h5>注册于今</h5>
+                            </a>
+                            <div class="border_line"></div>
+                            <p class="orderDate"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Blog Categorie Area =================-->
+
+<!--================Blog Area =================-->
+<section class="blog_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="blog_left_sidebar">
+                    <div class="order-card">
+                        <div class="order-card-header">
+                            <div class="order-card-header-left">
+                                个人信息
+                            </div>
+                            <div class="order-card-header-right">
+                                <button class="show-body">展示/收起</button>
+                            </div>
+                        </div>
+                        <div class="order-card-body">
+                            <form class="layui-form layui-form-pane">
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">用户名</label>
+                                        <div class="layui-inline">
+                                            <input type="text" readonly="readonly" class="layui-input username-input" name="username">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">昵称</label>
+                                        <div class="layui-inline">
+                                            <input type="text" class="layui-input nickname-input" name="nickname" required lay-verify="required">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">性别</label>
+                                        <div class="layui-input-block">
+                                            <input type="radio" name="gender" title="男" value="男">
+                                            <input type="radio" name="gender" title="女" value="女">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">出生日期</label>
+                                        <div class="layui-inline">
+                                            <input type="text" class="layui-input" name="birthday" id="birthday" required lay-verify="required">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <button type="submit" lay-submit="" lay-filter="update" class="layui-btn layui-btn-normal">修改</button>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline" style="    position: absolute;
+    left: 500px;
+    top: 50px;">
+                                        <div class="layui-upload">
+                                            <div class="layui-upload-list" style="    width: 100px;
+height: 100px;
+border-radius: 50%;
+overflow: hidden;">
+                                                <img class="layui-upload-img user-photo-show" style="width: 100px;height: 100px;">
+                                                <p class="user-photo-text"></p>
+                                            </div>
+                                            <button class="layui-btn user-photo" type="button">上传图片
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="order-card">
+                        <div class="order-card-header">
+                            <div class="order-card-header-left">
+                                绑定信息
+                            </div>
+                            <div class="order-card-header-right">
+                                <button class="show-body">展示/收起</button>
+                            </div>
+                        </div>
+                        <div class="order-card-body">
+                            <form class="layui-form layui-form-pane">
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">手机号</label>
+                                        <div class="layui-inline">
+                                            <input type="text" readonly="readonly" class="layui-input phone-input" name="phone">
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline">
+                                        <button type="button" class="layui-btn layui-btn-primary update-phone">修改手机号</button>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">邮箱</label>
+                                        <div class="layui-inline">
+                                            <input type="text" readonly="readonly" class="layui-input email-input" name="email">
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline">
+                                        <button type="button" class="layui-btn layui-btn-primary update-email">修改邮箱</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="order-card">
+                        <div class="order-card-header">
+                            <div class="order-card-header-left">
+                                密码修改
+                            </div>
+                            <div class="order-card-header-right">
+                                <button class="show-body">展示/收起</button>
+                            </div>
+                        </div>
+                        <div class="order-card-body">
+                            <form class="layui-form layui-form-pane">
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">原密码</label>
+                                        <div class="layui-inline">
+                                            <input type="password" class="layui-input" name="old_password" required lay-verify="required">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">新密码</label>
+                                        <div class="layui-inline">
+                                            <input type="password" class="layui-input" name="new_password" required lay-verify="required">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">再次输入</label>
+                                        <div class="layui-inline">
+                                            <input type="password" class="layui-input" name="again_password" required lay-verify="required">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <button type="submit" lay-submit="" lay-filter="updatePassword" class="layui-btn layui-btn-normal">修改</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="order-card">
+                        <div class="order-card-header">
+                            <div class="order-card-header-left">
+                                个人地址管理
+                            </div>
+                            <div class="order-card-header-right">
+                                <button class="show-body">展示/收起</button>
+                            </div>
+                        </div>
+                        <div class="order-card-body address-info-pane">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="blog_right_sidebar">
+                    <aside class="single_sidebar_widget author_widget">
+                        <img alt="" class="author_img rounded-circle" src="">
+                        <h4 class="user-name"></h4>
+                        <p>联系方式</p>
+                        <div class="social_icon">
+                            <a href="https://socialblade.com/youtube/c/overidea/realtime">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="https://twitter.com/realoverideahq">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="https://github.com/shimizumirika">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://space.bilibili.com/1393204919?spm_id_from=333.1007.0.0">
+                                <i class="fab fa-behance"></i>
+                            </a>
+                        </div>
+                        <div class="br"></div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Blog Area =================-->
+
+<!--================ Start footer Area  =================-->
+<footer>
+    <div class="footer-area footer-only">
+        <div class="container">
+            <div class="row section_gap">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="single-footer-widget tp_widgets ">
+                        <h4 class="footer_title large_title">关于我们</h4>
+                        <p>
+                            So seed seed green that winged cattle in. Gathering thing made fly you're no
+                            divided deep moved us lan Gathering thing us land years living.
+                        </p>
+                        <p>
+                            So seed seed green that winged cattle in. Gathering thing made fly you're no divided deep
+                            moved
+                        </p>
+                    </div>
+                </div>
+                <div class="offset-lg-1 col-lg-2 col-md-6 col-sm-6">
+                    <div class="single-footer-widget tp_widgets">
+                        <h4 class="footer_title">快速链接</h4>
+                        <ul class="list">
+                            <li><a href="/reception/url/index">主页</a></li>
+                            <li><a href="/reception/url/category">购物</a></li>
+                            <li><a href="/reception/url/stars">收藏</a></li>
+                            <li><a href="/reception/url/singleblog">订单</a></li>
+                            <li><a href="/reception/url/blog">个人中心</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6">
+                    <div class="single-footer-widget instafeed">
+                        <h4 class="footer_title">画廊</h4>
+                        <ul class="list instafeed d-flex flex-wrap">
+                            <li style="width: 70px;height: 70px;"><img style="width: 100%;height: 100%" alt="" src="/images/84910587-4.jpg"></li>
+                            <li style="width: 70px;height: 70px;"><img style="width: 100%;height: 100%" alt="" src="/images/84910587-4_fe7fc0b0.jpg"></li>
+                            <li style="width: 70px;height: 70px;"><img style="width: 100%;height: 100%" alt="" src="/images/93473348-2.jpg"></li>
+                            <li style="width: 70px;height: 70px;"><img style="width: 100%;height: 100%" alt="" src="/images/96721607-2.jpg"></li>
+                            <li style="width: 70px;height: 70px;"><img style="width: 100%;height: 100%" alt="" src="/images/97206605-2.jpg"></li>
+                            <li style="width: 70px;height: 70px;"><img style="width: 100%;height: 100%" alt="" src="/images/97206605-2_b20c87c9.jpg"></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="offset-lg-1 col-lg-3 col-md-6 col-sm-6">
+                    <div class="single-footer-widget tp_widgets">
+                        <h4 class="footer_title">联系我们</h4>
+                        <div class="ml-40">
+                            <p class="sm-head">
+                                <span class="fa fa-location-arrow"></span>
+                                总公司
+                            </p>
+                            <p>a243, ShuangHe Street, ZhengZhou City</p>
+
+                            <p class="sm-head">
+                                <span class="fa fa-phone"></span>
+                                手机号码
+                            </p>
+                            <p>
+                                +86 189 3729 9235 <br>
+                                +86 195 4562 5076
+                            </p>
+
+                            <p class="sm-head">
+                                <span class="fa fa-envelope"></span>
+                                邮箱
+                            </p>
+                            <p>
+                                3304079457@qq.com <br>
+                                www.magicbazaar.top
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row d-flex">
+                <p class="col-lg-12 footer-text text-center">
+                    Copyright &copy; 2021.Company Overidea All rights reserved
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+<button class="layui-btn layui-bg-blue online"><i class="layui-icon layui-icon-username"></i></button>
+
+<!--================ End footer Area  =================-->
+
+
+
+
+<form class="layui-form" id="address-form" style="display: none">
+    <div class="layui-form-item">
+    <div class="layui-inline">
+        <label class="layui-form-label">联系电话</label>
+        <div class="layui-inline">
+            <input type="text" class="layui-input" autocomplete="off" name="phone" placeholder="请输入联系电话" required lay-verify="required|phone">
+        </div>
+    </div>
+</div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">省份</label>
+            <div class="layui-inline">
+                <select class="parentMenu" lay-filter="parentMenu" name="parentMenu" required lay-verify="required"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">市级</label>
+            <div class="layui-inline">
+                <select class="orderMenu" lay-filter="orderMenu" name="orderMenu" required lay-verify="required"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">区</label>
+            <div class="layui-inline">
+                <select class="childMenu" lay-filter="childMenu" name="childMenu" required lay-verify="required"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">详情</label>
+            <div class="layui-inline">
+                <input type="text" class="layui-input" name="addressinfo" autocomplete="off" placeholder="请输入详细地址" required lay-verify="required">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label"></label>
+            <div class="layui-inline">
+                <button class="layui-btn layui-bg-blue" lay-filter="add-submit" lay-submit="add-submit" type="submit">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+<form class="layui-form" id="update-address-form" style="display: none">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">联系电话</label>
+            <div class="layui-inline">
+                <input type="text" class="layui-input" id="p1" autocomplete="off" name="phone"  placeholder="请输入联系电话" required lay-verify="required|phone">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">省份</label>
+            <div class="layui-inline">
+                <select class="parentMenu" lay-filter="parentMenu" name="parentMenu" required lay-verify="required"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">市级</label>
+            <div class="layui-inline">
+                <select class="orderMenu" lay-filter="orderMenu" name="orderMenu" required lay-verify="required"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">区</label>
+            <div class="layui-inline">
+                <select class="childMenu" lay-filter="childMenu" name="childMenu" required lay-verify="required"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">详情</label>
+            <div class="layui-inline">
+                <input type="text" class="layui-input"  id="address1" name="addressinfo" autocomplete="off" placeholder="请输入详细地址" required lay-verify="required">
+            </div>
+        </div>
+    </div>
+    <input type="text" hidden name="id" id="ua1">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label"></label>
+            <div class="layui-inline">
+                <button class="layui-btn layui-bg-blue" lay-filter="update-submit" lay-submit="update-submit" type="submit">
+                    修改
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+<script src="/js/jquery-3.2.1.min.js"></script>
+<!--<script src="/js/bootstrap.bundle.min.js"></script>-->
+<!--<script src="/js/skrollr.min.js"></script>-->
+<!--<script src="/js/owl.carousel.min.js"></script>-->
+<!--<script src="/js/jquery.nice-select.min.js"></script>-->
+<!--<script src="/js/jquery.ajaxchimp.min.js"></script>-->
+<!--<script src="/js/mail-script.js"></script>-->
+<!--<script src="/js/main.js"></script>-->
+<script charset="utf-8" src="/lib/layui-v2.6.3/layui.js"></script>
+<script charset="utf-8" src="/js/lay-config.js?v=2.0.0"></script>
+<script>
+    $(function () {
+        $.ajax({
+            type: 'post',
+            url: '/reception/user/checklogin',
+            success: function (result) {
+                if (result.success) {
+                    $('.user-center').append('<a class="button button-header logout-btn" href="javascript:">登出</a>')
+                }
+            }
+        })
+
+        $('.online').on('click', function () {
+            layer.open({
+                type: 2,
+                title: '在线咨询',
+                area: ['380px', '90%'],
+                content: '/reception/url/online',
+                shade: 0
+
+            });
+        })
+
+        $(document).on('click', '.logout-btn', function () {
+            $.ajax({
+                type: 'post',
+                url: '/reception/token/logout',
+                success: function (result) {
+                    if (result.success) {
+                        layer.msg('注销成功', {
+                            end: function () {
+                                window.location.href = '/reception/login';
+                            }
+                        })
+                    }
+                }
+            })
+        })
+
+        $(document).on("click", '.show-body', function () {
+            const that = $(this).parent().parent().next();
+            that.slideToggle('slow');
+        })
+
+        $(document).on('click', '.default-address-update', function () {
+            const id = $(this).val();
+
+            $.ajax({
+                type: 'post',
+                url: '/reception/user/defaultaddress',
+                data: {
+                    id: id
+                },
+                dataType: 'json',
+                success: function (result) {
+                    layer.msg(result.msg);
+                }
+             })
+        })
+
+        $(document).on('click', '.address-update', function () {
+            const id = $(this).val();
+            $.ajax({
+                type: 'post',
+                url: '/reception/user/useraddressfindone',
+                data: {
+                    id: id
+                },
+                dataType: 'json',
+                success: function (result) {
+                    //result.success:返回成功//result.data:返回结果集// console.log(result)
+                    console.log(result);
+                    $.ajax({
+                        url:'/addressComment/findtwo',
+                        type:'post',
+                        data:{
+                            id:result[0].address_id
+                        },
+                        dataType:'json',
+                        success:function (das) {
+                        console.log(das)
+                            $.ajax({
+                                type:'post',
+                                url:'/addressComment/findtwo',
+                                data:{
+                                    id:das[0].parent_id
+                                },
+                                dataType:'json',
+                                success:function (ds){
+                                    console.log(ds)
+                                    parentMenuArray(ds[0].parent_id);
+                                    orderMenuArray(ds[0].parent_id,ds[0].id);
+                                    childMenuArray(ds[0].id,das[0].id);
+                                    $('#p1').val(result[0].phone);
+                                    $('#address1').val(result[0].address_info);
+                                    $('#ua1').val(result[0].id);
+                                }
+                            });
+                        }
+                    });
+                }
+            })
+            index = layer.open({
+                title: '地址信息修改',
+                type: 1,
+                shade: 0.2,
+                shadeClose: true,
+                area: ['30%', '50%'],
+                content: $('#update-address-form'),
+                cancel: function () {
+                    $('#update-address-form').css('display', 'none');
+                }
+            });
+            $(window).on("resize", function () {
+                layer.full(index);//保证尺寸不会崩塌,按照原来的样式
+            });
+        })
+
+        $('.update-phone').on('click', function () {
+            let that = $(this);
+            layer.prompt({
+                formType: 0,
+                title: '手机号码',
+                placeholder: '请输入手机号码',
+            }, function (value, index) {
+                if (/^\d{11}$/.test(value) || value === $('.phone-input').val()) {
+                    layer.close(index);
+                    let thatValue = value;
+                    $.ajax({
+                        url: '/reception/user/updatephonecode',
+                        data: {
+                            phone: value
+                        },
+                        datatype: 'json',
+                        type: 'post',
+                        success: function (result) {
+                            if (result.success) {
+                                layer.prompt({
+                                    formType: 0,
+                                    title: '验证码',
+                                    placeholder: '已为你输入的手机发送验证码',
+                                }, function (value, index) {
+                                    if (/^\d+$/.test(value)) {
+                                        $.ajax({
+                                            url: '/reception/user/checkupdatephonecode',
+                                            data: {
+                                                phone: thatValue,
+                                                code: value
+                                            },
+                                            datatype: 'json',
+                                            type: 'post',
+                                            success: function (result) {
+                                                if (result.success) {
+                                                    $('.phone-input').val(thatValue);
+                                                    layer.close(index);
+                                                }
+                                                layer.msg(result.msg);
+                                            }
+                                        })
+                                    } else {
+                                        layer.msg('请输入正确的验证码');
+                                    }
+                                })
+                            }
+                        }
+                    })
+                } else {
+                    layer.msg('请输入正确的手机号');
+                }
+            })
+        })
+
+        $(document).on('click', '.address-delete', function () {
+            const that = $(this);
+            layer.confirm('确定要删除地址吗？', function (index) {
+                $.ajax({
+                    url: '/reception/user/deleteaddress',
+                    type: 'post',
+                    data: {
+                        id: that.val()
+                    },
+                    dataType: 'json',
+                    success: function (result) {
+                        if (result.success) {
+                            addressLoad();
+                        }
+                        layer.msg(result.msg);
+                        layer.close(index);
+                    }
+                })
+            })
+        })
+
+        $(document).on('click', '.add-address', function () {
+            parentMenuArray();
+            index = layer.open({
+                title: '地址信息填写',
+                type: 1,
+                shade: 0.2,
+                shadeClose: true,
+                area: ['30%', '50%'],
+                content: $('#address-form'),
+                cancel: function () {
+                    $('.address-form').css('display', 'none');
+                }
+            });
+            $(window).on("resize", function () {
+                layer.full(index);//保证尺寸不会崩塌,按照原来的样式
+            });
+        })
+
+        cartNum();
+        allOrder();
+        allPrice();
+        allDate();
+        userLoad()
+        addressLoad();
+    })
+
+    let index;
+
+    function cartNum() {
+        $.ajax({
+            url: '/reception/commodity/cartnum',
+            type: 'post',
+            success: function (result) {
+                $('.nav-shop__circle').text(result.data);
+            }
+        })
+    }
+    
+    function allOrder() {
+        $.ajax({
+            type: 'post',
+            url: '/reception/order/allorder',
+            success: function (result) {
+                $('.orderNumber').text('当前你一共创建了' + result.data + '条订单');
+            }
+        })
+    }
+
+    function allPrice() {
+        $.ajax({
+            type: 'post',
+            url: '/reception/order/allprice',
+            success: function (result) {
+                $('.orderPrice').text('当前你一共消费了' + result.data + '元');
+            }
+        })
+
+    }
+
+    function allDate() {
+        $.ajax({
+            type: 'post',
+            url: '/reception/order/alldate',
+            success: function (result) {
+                $('.orderDate').text('注册于今已经' + result.data + '天')
+            }
+        })
+    }
+
+    function userLoad() {
+        $.ajax({
+            type: 'post',
+            url: '/reception/user/info',
+            success: function (result) {
+                console.log(result.data)
+                if (result.success) {
+                    $('.author_img').attr('src', result.data.avatar);
+                    $('.user-photo-show').attr('src', result.data.avatar);
+                    $('.user-name').text(result.data.nickname);
+                    $('.username-input').val(result.data.username);
+                    $('.nickname-input').val(result.data.nickname);
+                    $('input[type="radio"]').each(function () {
+                        if ($(this).val() === result.data.gender) {
+                            $(this).attr('checked', true)
+                            layui.form.render();
+                        }
+                    })
+                    layui.use('laydate', function(){
+                        const laydate = layui.laydate;
+
+                        laydate.render({
+                            elem: '#birthday',
+                            max: -1,
+                            value: result.data.birthday
+                        });
+                    });
+
+                    $('.phone-input').val(result.data.phone);
+                    $('.email-input').val(result.data.email);
+                }
+            }
+        })
+    }
+
+    function addressLoad() {
+        $.ajax({
+            type: 'post',
+            url: '/reception/user/address',
+            success: function (result) {
+                if (result.success) {
+                    let html = '';
+                    $.each(result.data, function (i, object) {
+                        html += ' <div class="address-item" style="display: flex;justify-content: space-between;    margin: 10px 0;">\n' +
+                            '                                <div class="address-info" style="height: 38px;line-height: 19px;width: 60%">\n' +
+                            '                                       姓名：' + object.userName + '\t手机号：' + object.phone + '\t地址：' + object.addressName + '\n' +
+                            '                                </div>\n' +
+                            '                                <div class="address-update-form">\n';
+
+                        if (object.addressStatus === 1) {
+                            html += '默认<input type="radio" value="' + object.id + '" style="margin-right: 20px" name="address-default" class="default-address-update" checked>\n';
+                        } else {
+                            html += '默认<input type="radio" value="' + object.id + '" style="margin-right: 20px" name="address-default" class="default-address-update">\n';
+                        }
+
+                        html +='                                    <button class="layui-btn layui-btn-normal address-update" value="' + object.id + '">修改</button><button class="layui-btn layui-btn-normal address-delete" value="' + object.id + '">删除</button>\n' +
+                            '                                </div>\n' +
+                            '                            </div>';
+                    })
+
+                    html += '<button class="layui-btn layui-bg-blue add-address">添加地址</button>';
+                    $('.address-info-pane').empty().append(html);
+                }
+            }
+        })
+    }
+
+    layui.use(['form'], function () {
+        const form = layui.form;
+
+        form.on('submit(update)', function (data) {
+            if (data.field.nickname.length < 6 || data.field.nickname.length > 16) {
+                layer.msg('用户昵称在6-16位之间');
+                return false;
+            }
+
+            $.ajax({
+                type: 'post',
+                url: '/reception/user/update',
+                data: data.field,
+                dataType: 'json',
+                success: function (result) {
+                    layer.msg(result.msg);
+                }
+            })
+
+            return false;
+        })
+
+
+        form.on('submit(updatePassword)', function (data) {
+            if (data.field.old_password.length < 6 || data.field.old_password.length > 16) {
+                layer.msg('密码应在6-16位之间');
+                return false;
+            }
+            if (data.field.new_password.length < 6 || data.field.new_password.length > 16) {
+                layer.msg('密码应在6-16位之间');
+                return false;
+            }
+            if (data.field.again_password !== data.field.new_password) {
+                layer.msg('两次输入密码不一致');
+                return false;
+            }
+            if (data.field.old_password === data.field.again_password) {
+                layer.msg('密码修改不能相同');
+                return false;
+            }
+
+            $.ajax({
+                type: 'post',
+                data: {
+                    password: data.field.old_password
+                },
+                url: '/reception/user/checkpassword',
+                dataType: 'json',
+                success: function (result) {
+                    if (result.success) {
+                        $.ajax({
+                            type: 'post',
+                            data: {
+                                password: data.field.again_password
+                            },
+                            url: '/reception/user/changepassword',
+                            dataType: 'json',
+                            success: function (result) {
+                                if (result.success) {
+                                    layer.msg(result.msg);
+                                    // 登出
+                                    $.ajax({
+                                        type: 'post',
+                                        url: '/reception/token/logout',
+                                        success: function (result) {
+                                            if (result.success) {
+                                                layer.msg(result.msg + '需要重新登录，验证身份信息', {
+                                                    end: function () {
+                                                        window.location.href = '/reception/login';
+                                                    }
+                                                })
+                                            }
+                                        }
+                                    })
+                                } else {
+                                    layer.msg(result.msg);
+                                }
+                            }
+                        })
+                    } else {
+                        layer.msg(result.msg);
+                    }
+                }
+
+            })
+
+            return false;
+        })
+
+//用户收货地址添加
+        form.on('submit(add-submit)', function (data) {
+            $.ajax({
+                type: 'post',
+                url: '/reception/user/useraddressadd',
+                data: data.field,
+                dataType: 'json',
+                success: function (result) {
+                    if (result>0) {
+                        layer.msg('添加成功');
+                        addressLoad();
+                        layer.close(index);
+                    }
+                }
+            })
+
+            return false
+        });
+
+        //用户收获地址修改
+        form.on('submit(update-submit)', function (data) {
+            console.log(data.field);
+            $.ajax({
+                type: 'post',
+                url: '/reception/user/useraddressupdate',
+                data: data.field,
+                dataType: 'json',
+                success: function (result) {
+                    if (result>0) {
+                        layer.msg('修改成功');
+                        addressLoad();
+                        layer.close(index);
+                    }
+                }
+            })
+
+            return false
+        });
+        //当选择省份后才能选择市级
+        form.on('select(parentMenu)', function (data) {
+            orderMenuArray(data.value);
+        })
+//当选择市级后才能选择区级
+        form.on('select(orderMenu)', function (data) {
+            childMenuArray(data.value);
+        })
+
+    })
+
+    layui.use(['upload', 'element', 'layer'], function () {
+        const $ = layui.jquery
+            , upload = layui.upload
+            , element = layui.element
+            , layer = layui.layer;
+
+        //常规使用 - 普通图片上传
+        const uploadInst = upload.render({
+            elem: '.user-photo'
+            , url: '/reception/user/upload' //上传接口
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('.user-photo-show').attr('src', result); //图片链接（base64）
+                    $('.author_img').attr('src', result);
+                });
+
+                layer.msg('上传中', {icon: 16, time: 0});
+            }
+            , done: function (res) {
+                //如果上传成功
+                if (res.success) {
+                    $('.user-photo-text').html(''); //置空上传失败的状态
+                    return layer.msg('上传成功');
+                } else {
+                    return layer.msg('上传失败');
+                }
+            }
+            , error: function () {
+                //演示失败状态，并实现重传
+                const text = $('.user-photo-text');
+                text.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs user-photo-image-reload">重试</a>');
+                text.find('.user-photo-image-reload').on('click', function () {
+                    uploadInst.upload();
+                });
+            }
+        });
+    })
+
+    //地址信息类
+    //省份
+    function parentMenuArray(data){
+        $.ajax({
+            type:'post',
+            url:'/addressComment/find',
+            // data:{'pid':0},
+            success:function (result) {
+                const parentMenu=$('.parentMenu');//获取省份下拉框对象
+                parentMenu.empty();
+                parentMenu.append('<option value="">请选择</option>');
+                $.each(result,function (i,object){
+                    parentMenu.append('<option value="' + object.id + '">' + object.name + '</option>');
+                })
+                if (data!==undefined){
+                    parentMenu.val(""+data+"").click();
+                }
+                layui.form.render();
+            }
+        })
+    }
+    //市级
+    function orderMenuArray(data, obj) {
+        $.ajax({
+            type: 'post',
+            url: '/addressComment/finds',
+            data: {
+                pid: data
+            },
+            dataType: 'json',
+            success: function (result) {
+                const orderMenu = $('.orderMenu');
+                orderMenu.empty();
+                orderMenu.append('<option value="">请选择</option>');
+                $.each(result, function (i, object) {
+                    orderMenu.append('<option value="' + object.id + '">' + object.name + '</option>');
+                })
+                if (obj!==undefined){
+                    orderMenu.val(""+obj+"").click();
+                }
+                layui.form.render();
+            }
+        });
+    }
+    //区县级
+    function childMenuArray(data, obj) {
+        $.ajax({
+            type: 'post',
+            url: '/addressComment/finds',
+            data: {
+                pid: data
+            },
+            dataType: 'json',
+            success: function (result) {
+                const childMenu = $('.childMenu');
+                childMenu.empty();
+                childMenu.append('<option value="">请选择</option>');
+                $.each(result,function (i, object) {
+                    childMenu.append('<option value="' + object.id + '">' + object.name + '</option>');
+                })
+                if (obj !== undefined) {
+                    childMenu.val("" + obj + "").click();
+                }
+                layui.form.render();
+            }
+        })
+    }
+
+
+</script>
+</body>
+</html>

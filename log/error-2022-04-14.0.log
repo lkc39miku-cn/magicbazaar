@@ -1,0 +1,16 @@
+2022-04-14 09:52:21.909 [http-nio-8081-exec-2] ERROR com.a243.magicbazaar.config.log.LogAspect - ===============log start===============
+2022-04-14 09:52:21.918 [http-nio-8081-exec-2] ERROR com.a243.magicbazaar.config.log.LogAspect - verify:error
+2022-04-14 09:52:21.918 [http-nio-8081-exec-2] ERROR com.a243.magicbazaar.config.log.LogAspect - time:2022-04-14T09:52:21.918973300
+2022-04-14 09:52:21.918 [http-nio-8081-exec-2] ERROR com.a243.magicbazaar.config.log.LogAspect - error:Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to localhost/<unresolved>:6379
+2022-04-14 09:52:21.918 [http-nio-8081-exec-2] ERROR com.a243.magicbazaar.config.log.LogAspect - error info:class org.springframework.data.redis.RedisConnectionFailureException
+2022-04-14 09:52:21.932 [http-nio-8081-exec-2] ERROR com.a243.magicbazaar.config.log.LogAspect - method:com.a243.magicbazaar.controller.TokenController.tokenLogin()
+2022-04-14 09:52:21.932 [http-nio-8081-exec-2] ERROR com.a243.magicbazaar.config.log.LogAspect - params:[{"password":"1234567","username":"3304079457"},"on",null,null]
+2022-04-14 09:52:21.932 [http-nio-8081-exec-2] ERROR com.a243.magicbazaar.config.log.LogAspect - ===============log end===============
+2022-04-14 09:52:57.258 [http-nio-8081-exec-9] ERROR com.a243.magicbazaar.config.log.LogAspect - ===============log start===============
+2022-04-14 09:52:57.258 [http-nio-8081-exec-9] ERROR com.a243.magicbazaar.config.log.LogAspect - verify:error
+2022-04-14 09:52:57.258 [http-nio-8081-exec-9] ERROR com.a243.magicbazaar.config.log.LogAspect - time:2022-04-14T09:52:57.258551500
+2022-04-14 09:52:57.258 [http-nio-8081-exec-9] ERROR com.a243.magicbazaar.config.log.LogAspect - error:Unable to connect to Redis; nested exception is io.lettuce.core.RedisConnectionException: Unable to connect to localhost/<unresolved>:6379
+2022-04-14 09:52:57.258 [http-nio-8081-exec-9] ERROR com.a243.magicbazaar.config.log.LogAspect - error info:class org.springframework.data.redis.RedisConnectionFailureException
+2022-04-14 09:52:57.258 [http-nio-8081-exec-9] ERROR com.a243.magicbazaar.config.log.LogAspect - method:com.a243.magicbazaar.controller.TokenController.tokenLogin()
+2022-04-14 09:52:57.258 [http-nio-8081-exec-9] ERROR com.a243.magicbazaar.config.log.LogAspect - params:[{"password":"1234567","username":"3304079457"},"on",null,null]
+2022-04-14 09:52:57.258 [http-nio-8081-exec-9] ERROR com.a243.magicbazaar.config.log.LogAspect - ===============log end===============

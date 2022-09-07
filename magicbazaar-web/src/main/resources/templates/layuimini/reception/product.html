@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Aroma Shop - Product Details</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/all.min.css" rel="stylesheet">
+    <link href="/css/themify-icons.css" rel="stylesheet">
+    <link href="/css/style1.css" rel="stylesheet">
+    <link href="/css/nice-select.css" rel="stylesheet">
+    <link href="/css/owl.theme.default.min.css" rel="stylesheet">
+    <link href="/css/owl.carousel.min.css" rel="stylesheet">
+
+    <link href="/css/style.css" rel="stylesheet">
+    <style>
+        .content {
+            display: contents;
+        }
+        .left-30 {
+            margin-left: 30px;
+        }
+        .last-reply {
+            margin: 50px 0 0 0;
+        }
+        .online {
+            height: 58px;
+            line-height: 58px;
+            border-radius: 50%;
+            position: fixed;
+            right: 20px;
+            bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<!--================ Start Header Menu Area =================-->
+<header class="header_area">
+    <div class="main_menu">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <a class="navbar-brand logo_h" href="/reception/index"><img alt="" src="/picture/logo.png"></a>
+                <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                        class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse"
+                        type="button">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
+                        <li class="nav-item"><a class="nav-link" href="/reception/url/index">主页</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/reception/url/category">购物</a></li>
+<!--                        <li class="nav-item"><a class="nav-link" href="/reception/url/stars">收藏</a></li>-->
+                        <li class="nav-item"><a class="nav-link" href="/reception/url/singleblog">订单</a></li>
+                    </ul>
+
+                    <ul class="nav-shop">
+                        <li class="nav-item">
+                            <button><a href="/reception/url/cart"><i class="ti-shopping-cart"></i><span
+                                    class="nav-shop__circle"></span></a></button>
+                        </li>
+                        <li class="nav-item user-center"><a class="button button-header" href="/reception/url/blog">个人中心</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+<!--================ End Header Menu Area =================-->
+
+<!-- ================ start banner area ================= -->
+<section class="blog-banner-area" id="blog">
+    <div class="container h-100">
+        <div class="blog-banner">
+            <div class="text-center">
+                <h1>商品页面</h1>
+                <nav aria-label="breadcrumb" class="banner-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">主页</a></li>
+                        <li aria-current="page" class="breadcrumb-item active">普通购物</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ================ end banner area ================= -->
+
+
+<!--================Single Product Area =================-->
+<div class="product_image_area">
+    <div class="container">
+        <div class="row s_product_inner">
+            <div class="col-lg-6">
+                <div class="owl-carousel owl-theme s_Product_carousel">
+                    <div class="single-prd-item">
+                        <img alt="" class="img-fluid" th:src="${commodity.photo}">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 offset-lg-1">
+                <div class="s_product_text">
+                    <h3 th:text="${commodity.title}"></h3>
+                    <div th:if="${commodity.promotionType} eq '1'">
+                        <h2 th:text="${commodity.promotionPrice} + '元'"></h2>
+                    </div>
+                    <div th:if="${commodity.promotionType} eq '0'">
+                        <h2 th:text="${commodity.price} + '元'"></h2>
+                    </div>
+                    <ul class="list">
+                        <li><a class="active" href="#"><span>商品分类</span> : <span th:text="${commodity.commodityTypeName}"></span></a></li>
+                        <li><a href="#"><span>商品品牌</span> : <span th:text="${commodity.commodityBrandName}"></span></a></li>
+                    </ul>
+                    <p th:text="${commodity.description}"></p>
+                    <div class="product_count">
+                        <span th:if="${commodity.commodityNumber} gt '0'">
+                            <label>数量:</label>
+                            <button class="reduced items-count content"
+                                    onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 1 ) result.value--;return false;"
+                                    type="button" style="display: contents"><i class="ti-angle-left"></i></button>
+                            <input class="input-text qty commodity-number" id="sst" maxlength="12" name="qty" size="2" title="Quantity:"
+                               type="number" value="1" readonly="readonly" min="1">
+                            <button class="increase items-count content"
+                                    onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                                    type="button" style="display: contents"><i class="ti-angle-right"></i></button>
+                            <a class="button primary-btn left-30 add-cart" href="javascript:" th:value="${commodity.id}">添加到购物车</a>
+                        </span>
+                        <span th:if="${commodity.commodityNumber} le '0'">
+                             <a class="button primary-btn" href="javascript:" disabled="disabled">当前无货</a>
+                        </span>
+                    </div>
+                    <p class="cart-num" th:text="'货物剩余：' + ${commodity.commodityNumber}"></p>
+                    <div class="card_area d-flex align-items-center">
+<!--                        <a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a>-->
+<!--                        <a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--================End Single Product Area =================-->
+
+<!--================Product Description Area =================-->
+<section class="product_description_area">
+    <div class="container">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a aria-controls="home" aria-selected="true" class="nav-link active" data-toggle="tab" href="#home"
+                   id="home-tab" role="tab">简介</a>
+            </li>
+            <li class="nav-item">
+                <a aria-controls="contact" aria-selected="false" class="nav-link" data-toggle="tab" href="#contact"
+                   id="contact-tab" role="tab" th:value="${commodity.id}">评价</a>
+            </li>
+            <li class="nav-item">
+                <a aria-controls="review" aria-selected="false" class="nav-link" data-toggle="tab" href="#review"
+                   id="review-tab" role="tab" th:value="${commodity.id}">评分</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div aria-labelledby="home-tab" class="tab-pane fade show active" id="home" role="tabpanel">
+                <div th:if="${commodity.fullPhoto} != null" th:each="photo : ${#strings.arraySplit(commodity.fullPhoto, ';')}">
+                    <img th:src="${photo}" alt=""/>
+                </div>
+                <p th:text="${commodity.description}"></p>
+            </div>
+            <div aria-labelledby="contact-tab" class="tab-pane fade" id="contact" role="tabpanel">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="comment_list">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div aria-labelledby="review-tab" class="tab-pane fade" id="review" role="tabpanel">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row total_rate">
+                            <div class="col-6">
+                                <div class="box_total">
+                                    <h5>综合</h5>
+                                    <h4 class="stars_number"></h4>
+                                    <h6 class="stars_count"></h6>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="rating_list">
+                                    <h3 class="stars_title"></h3>
+                                    <ul class="list">
+                                        <li><a href="javascript:">5 星 <i class="fa fa-star fa-star"></i><i class="fa fa-star"></i><i
+                                                class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                                class="fa fa-star"></i><span class="five_stars"></span> </a></li>
+                                        <li><a href="javascript:">4 星 <i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                                class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                                class="fa fa-star-o"></i><span class="four_stars"></span> </a></li>
+                                        <li><a href="javascript:">3 星 <i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                                class="fa fa-star"></i><i
+                                                class="fa fa-star-o"></i><i
+                                                class="fa fa-star-o"></i><span class="three_stars"></span> </a></li>
+                                        <li><a href="javascript:">2 星 <i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                                class="fa fa-star-o"></i><i
+                                                class="fa fa-star-o"></i><i
+                                                class="fa fa-star-o"></i><span class="two_stars"></span> </a></li>
+                                        <li><a href="javascript:">1 星 <i class="fa fa-star"></i><i
+                                                class="fa fa-star-o"></i><i
+                                                class="fa fa-star-o"></i><i
+                                                class="fa fa-star-o"></i><i
+                                                class="fa fa-star-o"></i> <span class="one_stars"></span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review_list">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Product Description Area =================-->
+
+<!--================ Start related Product area =================-->
+<!--<section class="related-product-area section-margin&#45;&#45;small mt-0">-->
+<!--    <div class="container">-->
+<!--        <div class="section-intro pb-60px">-->
+<!--            <p>Popular Item in the market</p>-->
+<!--            <h2>Top <span class="section-intro__style">Product</span></h2>-->
+<!--        </div>-->
+<!--        <div class="row mt-30">-->
+<!--            <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">-->
+<!--                <div class="single-search-product-wrapper">-->
+<!--                    <div class="single-search-product d-flex">-->
+<!--                        <a href="#"><img alt="" src="static/picture/product-sm-1.png"></a>-->
+<!--                        <div class="desc">-->
+<!--                            <a class="title" href="#">Gray Coffee Cup</a>-->
+<!--                            <div class="price">$170.00</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="single-search-product d-flex">-->
+<!--                        <a href="#"><img alt="" src="static/picture/product-sm-2.png"></a>-->
+<!--                        <div class="desc">-->
+<!--                            <a class="title" href="#">Gray Coffee Cup</a>-->
+<!--                            <div class="price">$170.00</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="single-search-product d-flex">-->
+<!--                        <a href="#"><img alt="" src="static/picture/product-sm-3.png"></a>-->
+<!--                        <div class="desc">-->
+<!--                            <a class="title" href="#">Gray Coffee Cup</a>-->
+<!--                            <div class="price">$170.00</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">-->
+<!--                <div class="single-search-product-wrapper">-->
+<!--                    <div class="single-search-product d-flex">-->
+<!--                        <a href="#"><img alt="" src="static/picture/product-sm-4.png"></a>-->
+<!--                        <div class="desc">-->
+<!--                            <a class="title" href="#">Gray Coffee Cup</a>-->
+<!--                            <div class="price">$170.00</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="single-search-product d-flex">-->
+<!--                        <a href="#"><img alt="" src="static/picture/product-sm-5.png"></a>-->
+<!--                        <div class="desc">-->
+<!--                            <a class="title" href="#">Gray Coffee Cup</a>-->
+<!--                            <div class="price">$170.00</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="single-search-product d-flex">-->
+<!--                        <a href="#"><img alt="" src="static/picture/product-sm-6.png"></a>-->
+<!--                        <div class="desc">-->
+<!--                            <a class="title" href="#">Gray Coffee Cup</a>-->
+<!--                            <div class="price">$170.00</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">-->
+<!--                <div class="single-search-product-wrapper">-->
+<!--                    <div class="single-search-product d-flex">-->
+<!--                        <a href="#"><img alt="" src="static/picture/product-sm-7.png"></a>-->
+<!--                        <div class="desc">-->
+<!--                            <a class="title" href="#">Gray Coffee Cup</a>-->
+<!--                            <div class="price">$170.00</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="single-search-product d-flex">-->
+<!--                        <a href="#"><img alt="" src="static/picture/product-sm-8.png"></a>-->
+<!--                        <div class="desc">-->
+<!--                            <a class="title" href="#">Gray Coffee Cup</a>-->
+<!--                            <div class="price">$170.00</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="single-search-product d-flex">-->
+<!--                        <a href="#"><img alt="" src="static/picture/product-sm-9.png"></a>-->
+<!--                        <div class="desc">-->
+<!--                            <a class="title" href="#">Gray Coffee Cup</a>-->
+<!--                            <div class="price">$170.00</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">-->
+<!--                <div class="single-search-product-wrapper">-->
+<!--                    <div class="single-search-product d-flex">-->
+<!--                        <a href="#"><img alt="" src="static/picture/product-sm-1.png"></a>-->
+<!--                        <div class="desc">-->
+<!--                            <a class="title" href="#">Gray Coffee Cup</a>-->
+<!--                            <div class="price">$170.00</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="single-search-product d-flex">-->
+<!--                        <a href="#"><img alt="" src="static/picture/product-sm-2.png"></a>-->
+<!--                        <div class="desc">-->
+<!--                            <a class="title" href="#">Gray Coffee Cup</a>-->
+<!--                            <div class="price">$170.00</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="single-search-product d-flex">-->
+<!--                        <a href="#"><img alt="" src="static/picture/product-sm-3.png"></a>-->
+<!--                        <div class="desc">-->
+<!--                            <a class="title" href="#">Gray Coffee Cup</a>-->
+<!--                            <div class="price">$170.00</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+<!--================ end related Product area =================-->
+
+<!--================ Start footer Area  =================-->
+<footer>
+    <div class="footer-area footer-only">
+        <div class="container">
+            <div class="row section_gap">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="single-footer-widget tp_widgets ">
+                        <h4 class="footer_title large_title">关于我们</h4>
+                        <p>
+                            So seed seed green that winged cattle in. Gathering thing made fly you're no
+                            divided deep moved us lan Gathering thing us land years living.
+                        </p>
+                        <p>
+                            So seed seed green that winged cattle in. Gathering thing made fly you're no divided deep
+                            moved
+                        </p>
+                    </div>
+                </div>
+                <div class="offset-lg-1 col-lg-2 col-md-6 col-sm-6">
+                    <div class="single-footer-widget tp_widgets">
+                        <h4 class="footer_title">快速链接</h4>
+                        <ul class="list">
+                            <li><a href="/reception/url/index">主页</a></li>
+                            <li><a href="/reception/url/category">购物</a></li>
+                            <li><a href="/reception/url/stars">收藏</a></li>
+                            <li><a href="/reception/url/singleblog">订单</a></li>
+                            <li><a href="/reception/url/blog">个人中心</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6">
+                    <div class="single-footer-widget instafeed">
+                        <h4 class="footer_title">画廊</h4>
+                        <ul class="list instafeed d-flex flex-wrap">
+                            <li style="width: 70px;height: 70px;"><img style="width: 100%;height: 100%" alt="" src="/images/84910587-4.jpg"></li>
+                            <li style="width: 70px;height: 70px;"><img style="width: 100%;height: 100%" alt="" src="/images/84910587-4_fe7fc0b0.jpg"></li>
+                            <li style="width: 70px;height: 70px;"><img style="width: 100%;height: 100%" alt="" src="/images/93473348-2.jpg"></li>
+                            <li style="width: 70px;height: 70px;"><img style="width: 100%;height: 100%" alt="" src="/images/96721607-2.jpg"></li>
+                            <li style="width: 70px;height: 70px;"><img style="width: 100%;height: 100%" alt="" src="/images/97206605-2.jpg"></li>
+                            <li style="width: 70px;height: 70px;"><img style="width: 100%;height: 100%" alt="" src="/images/97206605-2_b20c87c9.jpg"></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="offset-lg-1 col-lg-3 col-md-6 col-sm-6">
+                    <div class="single-footer-widget tp_widgets">
+                        <h4 class="footer_title">联系我们</h4>
+                        <div class="ml-40">
+                            <p class="sm-head">
+                                <span class="fa fa-location-arrow"></span>
+                                总公司
+                            </p>
+                            <p>a243, ShuangHe Street, ZhengZhou City</p>
+
+                            <p class="sm-head">
+                                <span class="fa fa-phone"></span>
+                                手机号码
+                            </p>
+                            <p>
+                                +86 189 3729 9235 <br>
+                                +86 195 4562 5076
+                            </p>
+
+                            <p class="sm-head">
+                                <span class="fa fa-envelope"></span>
+                                邮箱
+                            </p>
+                            <p>
+                                3304079457@qq.com <br>
+                                www.magicbazaar.top
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row d-flex">
+                <p class="col-lg-12 footer-text text-center">
+                    Copyright &copy; 2021.Company Overidea All rights reserved
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+<button class="layui-btn layui-bg-blue online"><i class="layui-icon layui-icon-username"></i></button>
+
+<!--================ End footer Area  =================-->
+
+
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/skrollr.min.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/jquery.nice-select.min.js"></script>
+<script src="/js/jquery.ajaxchimp.min.js"></script>
+<script src="/js/mail-script.js"></script>
+<script src="/js/main.js"></script>
+<script charset="utf-8" src="/lib/layui-v2.6.3/layui.js"></script>
+<script charset="utf-8" src="/js/lay-config.js?v=2.0.0"></script>
+<link href="/lib/layui-v2.6.3/css/layui.css" media="all" rel="stylesheet">
+<script>
+    $(function () {
+        $.ajax({
+            type: 'post',
+            url: '/reception/user/checklogin',
+            success: function (result) {
+                if (result.success) {
+                    $('.user-center').append('<a class="button button-header logout-btn" href="javascript:">登出</a>')
+                }
+            }
+        })
+
+        $('.online').on('click', function () {
+            layer.open({
+                type: 2,
+                title: '在线咨询',
+                area: ['380px', '90%'],
+                content: '/reception/url/online',
+                shade: 0
+
+            });
+        })
+
+        $(document).on('click', '.logout-btn', function () {
+            $.ajax({
+                type: 'post',
+                url: '/reception/token/logout',
+                success: function (result) {
+                    if (result.success) {
+                        layer.msg('注销成功', {
+                            end: function () {
+                                window.location.href = '/reception/login';
+                            }
+                        })
+                    }
+                }
+            })
+        })
+
+        $('.add-cart').on("click", function () {
+            const commodity_number = $('.commodity-number');
+
+            $.ajax({
+                url: '/reception/commodity/addcart',
+                type: 'post',
+                data: {
+                    commodityId: $(this).attr('value'),
+                    commodityNumber: commodity_number.val()
+                },
+                dataType: 'json',
+                success: function (result) {
+                    if (result.success) {
+                        layer.msg(result.msg, {
+                            end: function () {
+                                cartNum();
+                                commodity_number.val(1);
+                            }
+                        });
+                    }
+                }
+            })
+        })
+
+
+        $('#review-tab').on('click', function () {
+            $.ajax({
+                type: 'post',
+                url: '/reception/commodity/stars',
+                data: {
+                    id: $(this).attr('value')
+                },
+                dataType: 'json',
+                success: function (result) {
+                    console.log(result.data)
+                    if (result.data !== null) {
+                        $('.stars_number').text(result.data.avgStars);
+                        $('.stars_count').text('(' + result.data.sumNumber + ')条评分记录');
+                        $('.stars_title').text('关于' + result.data.sumNumber + '条评分记录');
+                        $('.five_stars').text(result.data.five);
+                        $('.four_stars').text(result.data.four);
+                        $('.three_stars').text(result.data.three);
+                        $('.two_stars').text(result.data.two);
+                        $('.one_stars').text(result.data.one);
+
+                        let html = '';
+                        $.each(result.data.starsVoList, function (i, object) {
+                            html += '<div class="review_item" style="    padding: 10px 15px;\n' +
+                                '    box-shadow: rgb(0 0 0 / 16%) 0 1px 4px;">\n' +
+                                '                                <div class="media">\n' +
+                                '                                    <div class="d-flex" style="    width: 50px;\n' +
+                                '    height: 50px;\n' +
+                                '    border-radius: 50%;\n' +
+                                '    overflow: hidden;padding-right: 0">\n' +
+                                '                                        <img style="    width: 100%;\n' +
+                                '    height: 100%;" alt="" src="' + object.userPhoto + '">\n' +
+                                '                                    </div>\n' +
+                                '                                    <div class="media-body" style="padding-left: 15px;">\n' +
+                                '                                        <h4>' + object.username + '</h4>\n';
+
+                            const half = (object.stars + '').indexOf('.');
+                            const starsNumber = parseInt(object.stars);
+
+                            for (let i = 0; i < starsNumber; i++) {
+                                html += '                                        <i class="fa fa-star"></i>\n';
+                            }
+
+                            if (half !== -1) {
+                                html += '                                        <i class="fa fa-star fa-star-half"></i>\n';
+                            }
+
+                            html += ' </div>\n' +
+                                '                                </div>\n' +
+                                '                                <p>' + object.commentInfo + '</p>\n' +
+                                '                            </div>';
+                        })
+
+                        $('.review_list').empty().append(html);
+                    }
+                }
+            })
+        })
+
+        $(document).on('click', '.reply_btn', function () {
+            let that = $(this);
+
+            $('.reply-input').remove();
+            that.parent().parent().parent().append('<div class="reply-input">' +
+                '<form class="layui-form" style="display: flex;margin: 10px 0">' +
+                '<input class="layui-input" name="context" placeholder="请输入你要评论的内容" autocomplete="off" required lay-verify="required">' +
+                '<button type="submit" lay-submit="" lay-filter="reply" value="' + that.attr('th:value') + '" class="layui-btn layui-bg-blue">回复</button>' +
+                '</form>' +
+                '</div>');
+        })
+
+        $('#contact-tab').on('click', function () {
+            loadMessage($(this).attr('value'));
+        })
+
+        cartNum();
+    })
+
+    layui.use('form', function () {
+        const form = layui.form;
+
+        form.on('submit(reply)', function (data) {
+            const obj = $(this).val().split(',');
+            const commodityId = obj[0];
+            const toUserId = obj[1];
+            const parentId = obj[2];
+
+            $.ajax({
+                type: 'post',
+                url: '/reception/user/productreply',
+                data: {
+                    commodityId: commodityId,
+                    toUserId: toUserId,
+                    context: data.field.context,
+                    parentId: parentId
+                },
+                dataType: 'json',
+                success: function (result) {
+                    if (result.success) {
+                        loadMessage($('#contact-tab').attr('value'));
+                    }
+                    layer.msg(result.msg);
+                }
+            })
+
+            return false;
+        })
+
+        form.on('submit(first-reply)', function (data) {
+            const commodityId = $(this).val();
+
+            $.ajax( {
+                type: 'post',
+                data: {
+                    commodityId: commodityId,
+                    context: data.field.context
+                },
+                url: '/reception/user/firstreply',
+                dataType: 'json',
+                success: function (result) {
+                    if (result.success) {
+                        loadMessage($('#contact-tab').attr('value'));
+                    }
+                    layer.msg(result.msg);
+                }
+            })
+
+            return false;
+        })
+    })
+
+    function cartNum() {
+        $.ajax({
+            url: '/reception/commodity/cartnum',
+            type: 'post',
+            success: function (result) {
+                $('.nav-shop__circle').text(result.data);
+            }
+        })
+    }
+
+    function loadMessage(data) {
+        $.ajax({
+            url: '/reception/commodity/comment',
+            data: {
+                id: data
+            },
+            type: 'post',
+            dataType: 'json',
+            success: function (result) {
+                if (result.success) {
+                    console.log(result.data)
+
+                    const id = $('#contact-tab').attr('value');
+                    let html = '';
+                    $.each(result.data, function (i, object) {
+
+                        html += '<div class="review_item">\n' +
+                            '                                <div class="media">\n' +
+                            '                                    <div class="d-flex" style="width: 50px;height: 50px;border-radius: 50%;overflow: hidden;padding-right: 0">\n' +
+                            '                                        <img alt="" src="' + object.userPhoto + '" style="width: 100%;height: 100%;">\n' +
+                            '                                    </div>\n' +
+                            '                                    <div class="media-body" style="margin-left: 20px">\n' +
+                            '                                        <h4>' + object.userName + '</h4>\n' +
+                            '                                        <h5>' + object.createTime + '</h5>\n' +
+                            '                                        <a class="reply_btn" href="javascript:" th:value="' + object.commodityId + ',' + object.userId + ',' + object.id + '">Reply</a>\n' +
+                            '                                    </div>\n' +
+                            '                                </div>\n' +
+                            '                                <p>' + object.context + '</p>\n' +
+                            '                            </div>'
+
+                        if (object.child !== null) {
+                            $.each(object.child, function (index, item) {
+                                html += '<div class="review_item reply">\n' +
+                                    '                                <div class="media">\n' +
+                                    '                                    <div class="d-flex" style="width: 50px;height: 50px;border-radius: 50%;overflow: hidden;padding-right: 0">\n' +
+                                    '                                        <img alt="" src="' + item.userPhoto + '" style="width: 100%;height: 100%;">\n' +
+                                    '                                    </div>\n' +
+                                    '                                    <div class="media-body" style="margin-left: 20px">\n' +
+                                    '                                        <h4>' + item.userName + '</h4>\n' +
+                                    '                                        <h5>' + item.createTime + '</h5>\n' +
+                                    '                                        <a class="reply_btn" href="javascript:" th:value="' + item.commodityId + ',' + item.userId + ',' + item.id + '">Reply</a>\n' +
+                                    '                                    </div>\n' +
+                                    '                                </div>\n' +
+                                    '                                <p>@' + item.toUserName + '：' + item.context + '</p>\n' +
+                                    '                            </div>'
+                            })
+                        }
+                    })
+
+                    html += '<div class="review_item last-reply">\n' +
+                        '<form class="layui-form" style="display: flex;margin: 10px 0">' +
+                        '<input type="text" placeholder="请输入你的评论" name="context" autocomplete="off" class="layui-input" required lay-verify="required">' +
+                        '<button class="layui-btn layui-bg-blue" lay-submit="" lay-filter="first-reply" value="' + id + '">评论</button>' +
+                        '                            </form></div>';
+
+                    $('.comment_list').empty().append(html);
+                } else {
+                    layer.msg(result.msg);
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: magicbazaar
+  datasource:
+    url: jdbc:mysql://localhost:3306/magicbazaar?useUnicode=true&characterEncoding=utf-8&serverTimeZone=UTC
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: localhost
+    port: 6379
+    timeout: 1000
+  thymeleaf:
+    check-template: true
+    check-template-location: true
+    enabled: true
+    prefix: classpath:/templates/layuimini/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+    cache: false
+  web:
+    resources:
+      chain:
+        strategy:
+          content:
+            enabled: true
+            paths: /**
+      static-locations: classpath:static/
+  servlet:
+    multipart:
+      max-file-size: 1000MB
+      max-request-size: 100000MB
+  mail:
+    host: smtp.qq.com
+    username: 3304079457@qq.com
+    password: xopfkpjeumemcigb
+    default-encoding: UTF-8
+    port: 465
+    properties:
+      mail:
+        smtp:
+          auth: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+          starttls:
+            enable: true
+mybatis-plus:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      table-underline: true
+      table-prefix: mb_
+      id-type: auto
+logging:
+  config: classpath:log/logback-spring.xml

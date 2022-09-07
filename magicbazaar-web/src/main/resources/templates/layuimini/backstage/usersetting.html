@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>基本资料</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="/css/public.css" media="all">
+    <style>
+        .layui-form-item .layui-input-company {width: auto;padding-right: 10px;line-height: 38px;}
+    </style>
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+
+        <div class="layui-form layuimini-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label required">管理账号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="username" class="layui-input" readonly="readonly">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label required">手机号</label>
+                    <div class="layui-input-inline">
+                        <input autocomplete="off" class="layui-input phone-input" lay-verify="required|phone" name="phone"
+                               placeholder="请输入手机号" required type="text">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label required">验证码</label>
+                    <div class="layui-input-inline">
+                        <input autocomplete="off" class="layui-input" name="phoneCode"
+                               placeholder="请输入验证码" required type="text">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn layui-btn-primary phone" type="button">发送验证码</button>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label required">邮箱</label>
+                    <div class="layui-input-inline">
+                        <input autocomplete="off" class="layui-input email-input" lay-verify="required|email" name="email"
+                               placeholder="请输入邮箱" required type="text">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label required">验证码</label>
+                    <div class="layui-input-inline">
+                        <input autocomplete="off" class="layui-input" name="emailCode"
+                               placeholder="请输入验证码" required type="text">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn layui-btn-primary email" type="button">发送验证码</button>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="saveBtn">确认保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+<script src="/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<script src="/js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+<script>
+    layui.use(['form','miniTab'], function () {
+        const form = layui.form,
+            layer = layui.layer,
+            miniTab = layui.miniTab;
+
+        //监听提交
+        form.on('submit(saveBtn)', function (data) {
+            const index = layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            }, function () {
+                layer.close(index);
+                miniTab.deleteCurrentByIframe();
+            });
+            return false;
+        });
+
+    });
+
+    $(function () {
+        loadStaff();
+    })
+
+    function loadStaff() {
+        $.ajax({
+            type: 'post',
+            url: '/admin/staff/info',
+            success: function (result) {
+                $('input[name="username"]').val(result.data.username);
+                $('input[name="phone"]').val(result.data.phone);
+                $('input[name="email"]').val(result.data.email);
+            }
+        })
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Aroma Shop - Category</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/all.min.css" rel="stylesheet">
+    <link href="/css/themify-icons.css" rel="stylesheet">
+    <link href="/css/style1.css" rel="stylesheet">
+    <link href="/css/owl.theme.default.min.css" rel="stylesheet">
+    <link href="/css/owl.carousel.min.css" rel="stylesheet">
+    <link href="/css/nice-select.css" rel="stylesheet">
+    <link href="/css/nouislider.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <style>
+        .card-img {
+            /* height: 100%; */
+            height: 271px;
+            /* width: 100%; */
+            width: auto;
+            max-width: 100%;
+            border-radius: calc(.25rem - 1px);
+        }
+        .img-test:after {
+            position: absolute;
+            content: '';
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            box-shadow:0 0 100px 60px #ffffff inset;
+        }
+        .img-test-sm:after {
+            position: absolute;
+            content: '';
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            box-shadow:0 0 50px 30px #ffffff inset;
+        }
+        #pageInfo {
+            display: flex;
+            justify-content: center;
+        }
+        .online {
+            height: 58px;
+            line-height: 58px;
+            border-radius: 50%;
+            position: fixed;
+            right: 20px;
+            bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<!--================ Start Header Menu Area =================-->
+<header class="header_area">
+    <div class="main_menu">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <a class="navbar-brand logo_h" href="/reception/index"><img alt="" src="/picture/logo.png"></a>
+                <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                        class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse"
+                        type="button">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
+                        <li class="nav-item"><a class="nav-link" href="/reception/url/index">主页</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/reception/url/category">购物</a></li>
+<!--                        <li class="nav-item"><a class="nav-link" href="/reception/url/stars">收藏</a></li>-->
+                        <li class="nav-item"><a class="nav-link" href="/reception/url/singleblog">订单</a></li>
+                    </ul>
+
+                    <ul class="nav-shop">
+                        <li class="nav-item">
+                            <button><a href="/reception/url/cart"><i class="ti-shopping-cart"></i><span
+                                    class="nav-shop__circle"></span></a></button>
+                        </li>
+                        <li class="nav-item user-center"><a class="button button-header" href="/reception/url/blog">个人中心</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+<!--================ End Header Menu Area =================-->
+
+<!-- ================ start banner area ================= -->
+<section class="blog-banner-area" id="blog" style="overflow: hidden">
+    <img alt="" src="/images/backtop.jpg" style="width: 100%;margin-top: -500px;opacity: 0.1;">
+    <div class="container h-100">
+        <div class="blog-banner">
+            <div class="text-center">
+                <h1>商品 分类</h1>
+                <nav aria-label="breadcrumb" class="banner-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:">主页</a></li>
+                        <li aria-current="page" class="breadcrumb-item active">商品 分类</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ================ end banner area ================= -->
+
+
+<!-- ================ category section start ================= -->
+<section class="section-margin--small mb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-3 col-lg-4 col-md-5">
+                <div class="sidebar-filter">
+                    <div class="top-filter-head">商品 类型</div>
+                    <div class="common-filter commodity_type">
+                    </div>
+                </div>
+                <div class="sidebar-filter">
+                    <div class="top-filter-head">商品品牌</div>
+                    <div class="common-filter commodity_brand">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-9 col-lg-8 col-md-7">
+                <!-- Start Filter Bar -->
+                <div class="filter-bar d-flex flex-wrap align-items-center">
+                    <div class="sorting">
+                        <select class="orderByType" id="orderByType">
+                            <option value="">默认排序</option>
+                            <option value="price">按价格排序</option>
+                            <option value="create_time">按发售日期排序</option>
+                        </select>
+                    </div>
+                    <div>
+                        <div class="input-group filter-bar-search">
+                            <input placeholder="名称" type="text" name="name" class="commodity_name">
+                            <div class="input-group-append">
+                                <button type="button" class="commodity_btn"><i class="ti-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="layui-btn layui-btn-normal data-reset" type="button">重置</button>
+                    </div>
+                </div>
+                <!-- End Filter Bar -->
+                <!-- Start Best Seller -->
+                <section class="lattest-product-area pb-40 category-list">
+                    <div class="row commodity-info">
+                    </div>
+                    <div id="pageInfo"></div>
+                </section>
+                <!-- End Best Seller -->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ================ category section end ================= -->
+
+<!-- ================ Subscribe section start ================= -->
+<section class="subscribe-position">
+    <div class="container">
+        <div class="subscribe text-center">
+            <h3 class="subscribe__title">得到关于我们的任何更新</h3>
+            <p>承虚聚光 夜不惧</p>
+            <div id="mc_embed_signup">
+                <form action="#" class="subscribe-form form-inline mt-5 pt-1" method="get" target="_blank">
+                    <div class="form-group ml-sm-auto">
+                        <input class="form-control mb-1" name="EMAIL"
+                               onblur="this.placeholder = '你的邮箱'" onfocus="this.placeholder = ''"
+                               placeholder="你的邮箱" type="email">
+                        <div class="info"></div>
+                    </div>
+                    <button class="button button-subscribe mr-auto mb-1" type="submit">现在订阅</button>
+                    <div style="position: absolute; left: -5000px;">
+                        <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" type="text" value="">
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- ================ Subscribe section end ================= -->
+
+
+<!--================ Start footer Area  =================-->
+<footer>
+    <div class="footer-area footer-only">
+        <div class="container">
+            <div class="row section_gap">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="single-footer-widget tp_widgets ">
+                        <h4 class="footer_title large_title">关于我们</h4>
+                        <p>
+                            So seed seed green that winged cattle in. Gathering thing made fly you're no
+                            divided deep moved us lan Gathering thing us land years living.
+                        </p>
+                        <p>
+                            So seed seed green that winged cattle in. Gathering thing made fly you're no divided deep
+                            moved
+                        </p>
+                    </div>
+                </div>
+                <div class="offset-lg-1 col-lg-2 col-md-6 col-sm-6">
+                    <div class="single-footer-widget tp_widgets">
+                        <h4 class="footer_title">快速链接</h4>
+                        <ul class="list">
+                            <li><a href="/reception/url/index">主页</a></li>
+                            <li><a href="/reception/url/category">购物</a></li>
+                            <li><a href="/reception/url/stars">收藏</a></li>
+                            <li><a href="/reception/url/singleblog">订单</a></li>
+                            <li><a href="/reception/url/blog">个人中心</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6">
+                    <div class="single-footer-widget instafeed">
+                        <h4 class="footer_title">画廊</h4>
+                        <ul class="list instafeed d-flex flex-wrap">
+                            <li style="width: 70px;height: 70px;"><img style="width: 100%;height: 100%" alt="" src="/images/84910587-4.jpg"></li>
+                            <li style="width: 70px;height: 70px;"><img style="width: 100%;height: 100%" alt="" src="/images/84910587-4_fe7fc0b0.jpg"></li>
+                            <li style="width: 70px;height: 70px;"><img style="width: 100%;height: 100%" alt="" src="/images/93473348-2.jpg"></li>
+                            <li style="width: 70px;height: 70px;"><img style="width: 100%;height: 100%" alt="" src="/images/96721607-2.jpg"></li>
+                            <li style="width: 70px;height: 70px;"><img style="width: 100%;height: 100%" alt="" src="/images/97206605-2.jpg"></li>
+                            <li style="width: 70px;height: 70px;"><img style="width: 100%;height: 100%" alt="" src="/images/97206605-2_b20c87c9.jpg"></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="offset-lg-1 col-lg-3 col-md-6 col-sm-6">
+                    <div class="single-footer-widget tp_widgets">
+                        <h4 class="footer_title">联系我们</h4>
+                        <div class="ml-40">
+                            <p class="sm-head">
+                                <span class="fa fa-location-arrow"></span>
+                                总公司
+                            </p>
+                            <p>a243, ShuangHe Street, ZhengZhou City</p>
+
+                            <p class="sm-head">
+                                <span class="fa fa-phone"></span>
+                                手机号码
+                            </p>
+                            <p>
+                                +86 189 3729 9235 <br>
+                                +86 195 4562 5076
+                            </p>
+
+                            <p class="sm-head">
+                                <span class="fa fa-envelope"></span>
+                                邮箱
+                            </p>
+                            <p>
+                                3304079457@qq.com <br>
+                                www.magicbazaar.top
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row d-flex">
+                <p class="col-lg-12 footer-text text-center">
+                    Copyright &copy; 2021.Company Overidea All rights reserved
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+<button class="layui-btn layui-bg-blue online"><i class="layui-icon layui-icon-username"></i></button>
+
+<!--================ End footer Area  =================-->
+
+
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/skrollr.min.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/jquery.nice-select.min.js"></script>
+<script src="/js/nouislider.min.js"></script>
+<script src="/js/jquery.ajaxchimp.min.js"></script>
+<script src="/js/mail-script.js"></script>
+<script src="/js/main.js"></script>
+<script charset="utf-8" src="/lib/layui-v2.6.3/layui.js"></script>
+<script charset="utf-8" src="/js/lay-config.js?v=2.0.0"></script>
+<link href="/lib/layui-v2.6.3/css/layui.css" media="all" rel="stylesheet">
+<script>
+    $(function () {
+        $.ajax({
+            type: 'post',
+            url: '/reception/user/checklogin',
+            success: function (result) {
+                if (result.success) {
+                    $('.user-center').append('<a class="button button-header logout-btn" href="javascript:">登出</a>')
+                }
+            }
+        })
+
+        $('.online').on('click', function () {
+            layer.open({
+                type: 2,
+                title: '在线咨询',
+                area: ['380px', '90%'],
+                content: '/reception/url/online',
+                shade: 0
+
+            });
+        })
+
+        $(document).on('click', '.logout-btn', function () {
+            $.ajax({
+                type: 'post',
+                url: '/reception/token/logout',
+                success: function (result) {
+                    if (result.success) {
+                        layer.msg('注销成功', {
+                            end: function () {
+                                window.location.href = '/reception/login';
+                            }
+                        })
+                    }
+                }
+            })
+        })
+
+        loadCommodityType();
+        loadCommodityBrand();
+        loadCommodity();
+
+
+        $(document).on("click", '.commodityType', function () {
+            commodityTypeId = $(this).val();
+            loadCommodity();
+        })
+
+        $(document).on('click', '.commodityBrand', function () {
+            commodityBrandId = $(this).val();
+            loadCommodity();
+        })
+
+        $(document).on('change', '.orderByType', function () {
+            orderByDesc = $(this).val();
+            loadCommodity();
+        })
+
+        $(document).on('click', '.add-cart', function () {
+            $.ajax({
+                url: '/reception/commodity/addcart',
+                type: 'post',
+                data: {
+                    commodityId: $(this).val()
+                },
+                dataType: 'json',
+                success: function (result) {
+                    if (result.success) {
+                        layer.msg(result.msg);
+                        cartNum();
+                    }
+                }
+            })
+        })
+
+        $('.commodity_btn').on('click', function () {
+            title = $('.commodity_name').val();
+
+            loadCommodity();
+        })
+
+        $('.data-reset').on('click', function () {
+            commodityTypeId = '';
+            commodityBrandId = '';
+            minPrice = '';
+            maxPrice = '';
+            orderByDesc = '';
+            title = '';
+            $('.commodityType').each(function () {
+                $(this).prop('checked', false);
+            })
+            $('.commodityBrand').each(function () {
+                $(this).prop('checked', false);
+            })
+
+            // $('.orderByType option:first').prop('selected', 'selected');
+            $('.commodity_name').val('');
+
+            loadCommodity();
+        })
+
+        cartNum();
+    })
+
+    function cartNum() {
+        $.ajax({
+            url: '/reception/commodity/cartnum',
+            type: 'post',
+            success: function (result) {
+                console.log(result.data)
+                $('.nav-shop__circle').text(result.data);
+            }
+        })
+    }
+
+    function loadCommodityType() {
+        $.ajax({
+            type: 'post',
+            url: '/reception/commodity/type/list',
+            success: function (result) {
+                const commodityType = $('.commodity_type');
+                $.each(result.data, function (i, object) {
+                    commodityType.append('<div class="head">' + object.name + '</div>\n' +
+                        '                        <form action="javascript:">\n' +
+                        '                            <ul>\n');
+
+                    $.each(object.children, function (index, item) {
+                        commodityType.append('<li class="filter-list"><input class="pixel-radio commodityType" name="type" type="radio" value="' + item.id + '"><label\n' +
+                            '                                        >' + item.name + '<span>(' + item.number + ')</span></label></li>')
+                    })
+
+                    commodityType.append('</ul></form>')
+                })
+            }
+        })
+    }
+
+    function loadCommodityBrand() {
+        $.ajax({
+            type: 'post',
+            url: '/reception/commodity/brand/list',
+            success: function (result) {
+                const commodityBrand = $('.commodity_brand');
+                commodityBrand.append('<div class="head">品牌</div>\n' +
+                    '                        <form action="javascript:">\n' +
+                    '                            <ul>\n');
+                $.each(result.data, function (i, object) {
+                    commodityBrand.append('<li class="filter-list"><input class="pixel-radio commodityBrand" name="brand" type="radio" value="' + object.id + '"><label\n' +
+                        '                                        >' + object.name + '<span>(' + object.number + ')</span></label></li>')
+                })
+                commodityBrand.append('</ul></form>')
+            }
+        })
+    }
+
+    let page = 1;
+    let limit = 9;
+    let total = 0;
+    let commodityTypeId = '';
+    let commodityBrandId = '';
+    let minPrice = '';
+    let maxPrice = '';
+    let orderByDesc = '';
+    let title = '';
+
+    function loadCommodity() {
+        $.ajax({
+            url: '/reception/commodity/list',
+            type: 'post',
+            data: {
+                page: page,
+                limit: limit,
+                commodityTypeId: commodityTypeId,
+                commodityBrandId: commodityBrandId,
+                title: title,
+                orderByDesc: orderByDesc
+            },
+            dataType: 'json',
+            success: function (result) {
+                if (result.success) {
+                    total = result.count;
+                    const commodity = $('.commodity-info');
+
+                    let html = '';
+                    $.each(result.data, function(i, object) {
+
+                        html += '<div class="col-md-6 col-lg-4">\n' +
+                            '                        <div class="card text-center card-product">\n' +
+                            '                            <div class="card-product__img">\n' +
+                            '                                 <div class="img-test-sm"><img alt="" class="card-img" src="' + object.photo + '"></div>\n' +
+                            '                                     <ul class="card-product__imgOverlay">\n' +
+                            '                                        <li>\n' +
+                            '                                             <button><a href="/reception/commodity/' + object.id +'"><i class="ti-search"></i></a></button>\n' +
+                            '                                        </li>\n';
+
+                        if (object.commodityNumber > 0) {
+                            html += '                                <li>\n' +
+                                '                                         <button class="add-cart" value="' + object.id + '"><i class="ti-shopping-cart"></i></button>\n' +
+                                '                                    </li>\n';
+                        }
+
+                        html += '' +
+                            // '                                    <li>\n' +
+                            // '                                            <button><i class="ti-heart"></i></button>\n' +
+                            // '                                        </li>\n' +
+                            '                                    </ul>\n' +
+                            '                                </div>\n' +
+                            '                                <div class="card-body">\n' +
+                            '                                    <p>' + object.commodityTypeName + '</p>\n' +
+                            '                                    <h4 class="card-product__title"><a href="/reception/commodity/' + object.id +'">' + object.title.substring(0, 12).concat('...') + '</a></h4>\n' +
+                            '                                    <p class="card-product__price">' + object.price + '元</p>\n' +
+                            '                                </div>\n' +
+                            '                            </div>\n' +
+                            '                        </div>\n' +
+                            '  </div>';
+                    })
+
+                    commodity.empty().append(html);
+                    loadPage();
+                }
+            }
+        })
+
+    }
+
+    function loadPage() {
+        layui.use(['laypage'], function () {
+            laypage = layui.laypage
+
+            laypage.render({
+                elem: 'pageInfo'
+                , count: total
+                , limit: 9
+                , curr: page
+                , groups: 5
+                , prev: '上一页'
+                , netx: '下一页'
+                , first: '首页'
+                , last: '尾页'
+                , layout: ['prev', 'page', 'next', 'skip']
+                , jump: function (obj, first) {
+                    page = obj.curr;
+                    limit = obj.limit;
+                    if (!first) {
+                        loadCommodity();
+                    }
+                }
+            })
+        });
+    }
+</script>
+</body>
+</html>

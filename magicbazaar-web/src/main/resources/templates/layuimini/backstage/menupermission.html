@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模块信息</title>
+    <meta content="webkit" name="renderer">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+    <link href="/lib/layui-v2.6.3/css/layui.css" media="all" rel="stylesheet">
+    <link href="/css/public.css" media="all" rel="stylesheet">
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+
+        <script id="menu_permission_table_tool" type="text/html">
+            <div class="layui-btn-container">
+                <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加</button>
+            </div>
+        </script>
+
+        <table class="layui-hide" id="menu_permission_table" lay-filter="menu_permission_table"></table>
+
+        <script id="menu_permission_table_templet" type="text/html">
+            <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
+            {{# if(d.deleteStatus === 0) { }}
+            {{# if(d.isPermission !== 3) { }}
+            {{# if(d.publishStatus === 0) { }}
+            <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="on">启用</a>
+            {{# } else { }}
+            <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="off">禁用</a>
+            {{# } }}
+            {{# } }}
+            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+            {{# } else { }}
+            <a class="layui-btn layui-btn-xs layui-btn-danger">已删除</a>
+            {{# } }}
+        </script>
+
+    </div>
+</div>
+<form class="layui-form layui-form-pane" hidden id="add-form" lay-filter="add-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">添加模块</label>
+            <div class="layui-input-block">
+                <input checked lay-filter="module" name="check" title="顶部菜单" type="radio" value="parentMenu">
+                <input lay-filter="module" name="check" title="主菜单" type="radio" value="orderMenu">
+                <input lay-filter="module" name="check" title="子菜单" type="radio" value="childMenu">
+                <input lay-filter="module" name="check" title="接口" type="radio" value="interface">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">名称</label>
+            <div class="layui-inline">
+                <input autocomplete="off" class="layui-input" name="name" required lay-verify="required" placeholder="请输入名称" type="text">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">路径</label>
+            <div class="layui-inline">
+                <input autocomplete="off" class="layui-input" disabled name="path" placeholder="请输入路径" type="text">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">顶部菜单</label>
+            <div class="layui-inline">
+                <select class="parentMenu" disabled lay-filter="parentMenu" name="parentMenu"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">主菜单</label>
+            <div class="layui-inline">
+                <select class="orderMenu" disabled lay-filter="orderMenu" name="orderMenu"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">子菜单</label>
+            <div class="layui-inline">
+                <select class="childMenu" disabled name="childMenu"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">简介</label>
+            <div class="layui-inline">
+                <textarea class="layui-textarea" name="description" placeholder="请输入简介"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label"></label>
+            <div class="layui-inline">
+                <button class="layui-btn layui-bg-blue" lay-filter="add-submit" lay-submit="add-submit" type="submit">
+                    添加
+                </button>
+                <button class="layui-btn layui-bg-orange data-reset" type="reset">重置</button>
+            </div>
+        </div>
+    </div>
+</form>
+<form class="order-menu layui-form" hidden lay-filter="order-menu">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">名称</label>
+            <div class="layui-inline">
+                <input hidden name="id" type="text">
+                <input hidden name="isPermission" type="text">
+                <input autocomplete="off" class="layui-input" lay-verify="required" name="name" required type="text">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">顶部菜单</label>
+            <div class="layui-inline">
+                <select class="parentMenu" lay-verify="required" name="parentMenu" required></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label"></label>
+            <div class="layui-inline">
+                <button class="layui-btn layui-bg-blue" lay-filter="update-submit" lay-submit="update-submit"
+                        type="submit">修改
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+<form class="child-menu layui-form" hidden lay-filter="child-menu">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">名称</label>
+            <div class="layui-inline">
+                <input hidden name="id" type="text">
+                <input hidden name="isPermission" type="text">
+                <input autocomplete="off" class="layui-input" lay-verify="required" name="name" required type="text">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">路径</label>
+            <div class="layui-inline">
+                <input autocomplete="off" class="layui-input" lay-verify="required" name="path" required type="text">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">顶部菜单</label>
+            <div class="layui-inline">
+                <select lay-verify="required" name="parentMenu" required class="parentMenu" lay-filter="parentMenu"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">主菜单</label>
+            <div class="layui-inline">
+                <select lay-verify="required" name="orderMenu" required class="orderMenu" lay-filter="orderMenu"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label"></label>
+            <div class="layui-inline">
+                <button class="layui-btn layui-bg-blue" lay-filter="update-submit" lay-submit="update-submit"
+                        type="submit">修改
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+<form class="interface-menu layui-form" hidden lay-filter="interface-menu">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">名称</label>
+            <div class="layui-inline">
+                <input hidden name="id" type="text">
+                <input hidden name="isPermission" type="text">
+                <input autocomplete="off" class="layui-input" lay-verify="required" name="name" required type="text">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">路径</label>
+            <div class="layui-inline">
+                <input autocomplete="off" lay-verify="required" name="path" required type="text" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">顶部菜单</label>
+            <div class="layui-inline">
+                <select lay-verify="required" name="parentMenu" required class="parentMenu" lay-filter="parentMenu"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">主菜单</label>
+            <div class="layui-inline">
+                <select lay-verify="required" name="orderMenu" required class="orderMenu" lay-filter="orderMenu"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">子菜单</label>
+            <div class="layui-inline">
+                <select lay-verify="required" name="childMenu" required class="childMenu" lay-filter="childMenu"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label"></label>
+            <div class="layui-inline">
+                <button class="layui-btn layui-bg-blue" lay-filter="update-submit" lay-submit="update-submit"
+                        type="submit">修改
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+<script src="/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+<script charset="utf-8" src="/lib/layui-v2.6.3/layui.js"></script>
+<script charset="utf-8" src="/js/lay-config.js?v=1.0.4"></script>
+<script>
+    layui.use(['form', 'table', 'treetable'], function () {
+        const $ = layui.jquery,
+            form = layui.form,
+            table = layui.table,
+            treetable = layui.treetable;
+
+
+        treeLoad();
+
+        function treeLoad() {
+            // 渲染表格
+            layer.load(2);
+            treetable.render({
+                treeColIndex: 1,
+                treeSpid: 0,
+                url: '/admin/role/permission/list',
+                where: {
+                    tree: true
+                },
+                toolbar: '#menu_permission_table_tool',
+                treeIdName: 'id',
+                treePidName: 'parentId',
+                elem: '#menu_permission_table',
+                page: false,
+                cols: [
+                    [
+                        {
+                            field: 'id', width: 80, fixed: 'left', title: 'ID', templet: function (d) {
+                                if (d.id === null) {
+                                    return d.falseId;
+                                } else {
+                                    return d.id;
+                                }
+                            }
+                        },
+                        {field: 'name', minWidth: 240, title: '名称'},
+                        {
+                            field: 'menuValue', minWidth: 200, title: '菜单标识', templet: function (d) {
+                                if (d.id === null) {
+                                    return '';
+                                } else if (d.menuValue === null) {
+                                    return '';
+                                } else {
+                                    return d.menuValue;
+                                }
+                            }
+                        },
+                        {
+                            field: 'permissionValue', minWidth: 240, title: '接口标识', templet: function (d) {
+                                if (d.id === null) {
+                                    return d.permissionValue;
+                                } else {
+                                    return '';
+                                }
+                            }
+                        },
+                        {
+                            field: 'parentId', align: 'center', minWidth: 80, title: '父级ID', templet: function (d) {
+                                if (d.parentId === 0) {
+                                    return '';
+                                } else {
+                                    return d.parentId;
+                                }
+                            }
+                        },
+                        {
+                            field: 'isPermission', minWidth: 120, align: 'center', title: '标识', templet: function (d) {
+                                if (d.isPermission === 0) {
+                                    return '<span class="layui-badge layui-bg-red">顶部菜单</span>';
+                                } else if (d.isPermission === 1) {
+                                    return '<span class="layui-badge layui-bg-orange">主菜单</span>';
+                                } else if (d.isPermission === 2) {
+                                    return '<span class="layui-badge layui-bg-blue">子菜单</span>';
+                                } else if (d.isPermission === 3) {
+                                    return '<span class="layui-badge layui-bg-green">接口</span>';
+                                }
+                            }
+                        },
+                        {
+                            field: 'publishStatus',
+                            align: 'center',
+                            minWidth: 120,
+                            title: '启用标识',
+                            templet: function (d) {
+                                if (d.isPermission === 3) {
+                                    return '';
+                                } else if (d.publishStatus === 0) {
+                                    return '<span class="layui-badge layui-bg-red">未启用</span>';
+                                } else {
+                                    return '<span class="layui-badge layui-bg-blue">已启用</span>';
+                                }
+                            }
+                        },
+                        {
+                            field: 'deleteStatus',
+                            align: 'center',
+                            minWidth: 120,
+                            title: '删除标识',
+                            templet: function (d) {
+                                if (d.deleteStatus === 0) {
+                                    return '<span class="layui-badge layui-bg-blue">未删除</span>';
+                                } else {
+                                    return '<span class="layui-badge layui-bg-red">已删除</span>';
+                                }
+                            }
+                        },
+                        {field: 'createTime', width: 200, align: 'center', title: '创建时间'},
+                        {field: 'updateTime', width: 200, align: 'center', title: '修改时间'},
+                        {
+                            templet: '#menu_permission_table_templet',
+                            width: 240,
+                            align: 'center',
+                            title: '操作',
+                            fixed: 'right'
+                        }
+                    ]
+                ],
+                done: function () {
+                    layer.closeAll('loading')
+                }
+            });
+        }
+
+        let index;
+
+        function parentMenuArray(data) {
+            $.ajax({
+                type: 'post',
+                url: '/admin/menu/permission/parent',
+                success: function (result) {
+                    const parentMenu = $('.parentMenu');
+                    parentMenu.empty();
+                    parentMenu.append('<option value="">请选择</option>');
+                    $.each(result.data, function (i, object) {
+                        parentMenu.append('<option value="' + object.id + '">' + object.title + '</option>');
+                    })
+                    if (data !== undefined) {
+                        parentMenu.val("" + data + "").click();
+                    }
+                    layui.form.render();
+                }
+            })
+        }
+
+        function orderMenuArray(data, obj) {
+            $.ajax({
+                type: 'post',
+                url: '/admin/menu/permission/order',
+                data: {
+                    parentId: data
+                },
+                dataType: 'json',
+                success: function (result) {
+                    const orderMenu = $('.orderMenu');
+                    orderMenu.empty();
+                    orderMenu.append('<option value="">请选择</option>');
+                    $.each(result.data, function (i, object) {
+                        orderMenu.append('<option value="' + object.id + '">' + object.title + '</option>');
+                    })
+                    if (obj !== undefined) {
+                        orderMenu.val("" + obj + "").click();
+                    }
+                    layui.form.render();
+                }
+            })
+        }
+
+        function childMenuArray(data, obj) {
+            $.ajax({
+                type: 'post',
+                url: '/admin/menu/permission/child',
+                data: {
+                    parentId: data
+                },
+                dataType: 'json',
+                success: function (result) {
+                    const childMenu = $('.childMenu');
+                    childMenu.empty();
+                    childMenu.append('<option value="">请选择</option>');
+                    $.each(result.data, function (i, object) {
+                        childMenu.append('<option value="' + object.id + '">' + object.title + '</option>');
+                    })
+                    if (obj !== undefined) {
+                        childMenu.val("" + obj + "").click();
+                    }
+                    layui.form.render();
+                }
+            })
+        }
+
+        form.on('radio(module)', function (data) {
+            const parentMenu = $('.parentMenu');
+            const orderMenu = $('.orderMenu');
+            const childMenu = $('.childMenu');
+            const path = $('input[name="path"]');
+            if (data.value === 'parentMenu') {
+                parentMenu.attr('disabled', true).attr('lay-verify', '').empty();
+                orderMenu.attr('disabled', true).attr('lay-verify', '').empty();
+                childMenu.attr('disabled', true).attr('lay-verify', '').empty();
+                path.attr('disabled', true).attr('lay-verify', '');
+            } else if (data.value === 'orderMenu') {
+                parentMenuArray();
+                path.attr('disabled', true).attr('lay-verify', '');
+                parentMenu.attr('disabled', false).attr('lay-verify', 'required').empty();
+                childMenu.attr('disabled', true).attr('lay-verify', '').empty();
+                orderMenu.attr('disabled', true).attr('lay-verify', '').empty();
+            } else if (data.value === 'childMenu') {
+                parentMenuArray();
+                path.attr('disabled', false).attr('lay-verify', 'required');
+                parentMenu.attr('disabled', false).attr('lay-verify', 'required').empty();
+                childMenu.attr('disabled', true).attr('lay-verify', '').empty();
+                orderMenu.attr('disabled', false).attr('lay-verify', 'required').empty();
+            } else if (data.value === 'interface') {
+                parentMenuArray();
+                path.attr('disabled', false).attr('lay-verify', 'required');
+                parentMenu.attr('disabled', false).attr('lay-verify', 'required').empty();
+                childMenu.attr('disabled', false).attr('lay-verify', 'required').empty();
+                orderMenu.attr('disabled', false).attr('lay-verify', 'required').empty();
+            }
+            layui.form.render()
+        });
+
+        form.on('select(parentMenu)', function (data) {
+            orderMenuArray(data.value);
+        })
+
+        form.on('select(orderMenu)', function (data) {
+            childMenuArray(data.value);
+        })
+
+        // 添加菜单
+        form.on('submit(add-submit)', function (data) {
+            $.ajax({
+                url: '/admin/menu/add',
+                type: 'post',
+                data: data.field,
+                dataType: 'json',
+                success: function (result) {
+                    layer.msg(result.msg);
+                    if (result.success) {
+                        layer.close(index);
+                        treeLoad();
+                    }
+                }
+            });
+            return false;
+        });
+
+        // 更新菜单
+        form.on('submit(update-submit)', function (data) {
+            $.ajax({
+                url: '/admin/menu/update',
+                type: 'post',
+                dataType: 'json',
+                data: data.field,
+                success: function (result) {
+                    layer.msg(result.msg);
+                    if (result.success) {
+                        layer.close(index);
+                        treeLoad();
+                    }
+                }
+            });
+            return false;
+        });
+
+
+        /**
+         * toolbar监听事件
+         */
+        table.on('toolbar(menu_permission_table)', function (obj) {
+            if (obj.event === 'add') {  // 监听添加操作
+                $('.data-reset').click();
+                const parentMenu = $('.parentMenu');
+                const orderMenu = $('.orderMenu');
+                const childMenu = $('.childMenu');
+                const path = $('input[name="path"]');
+                parentMenu.attr('disabled', true).attr('lay-verify', '').empty();
+                orderMenu.attr('disabled', true).attr('lay-verify', '').empty();
+                childMenu.attr('disabled', true).attr('lay-verify', '').empty();
+                path.attr('disabled', true).attr('lay-verify', '');
+                index = layer.open({
+                    title: '添加模块信息',
+                    type: 1,
+                    shade: 0.2,
+                    shadeClose: true,
+                    area: ['100%', '100%'],
+                    content: $('#add-form'),
+                });
+                $(window).on("resize", function () {
+                    layer.full(index);
+                });
+            }
+        });
+
+        table.on('tool(menu_permission_table)', function (obj) {
+            const data = obj.data;
+            if (obj.event === 'edit') {
+                $('.parentMenu').empty();
+                $('.orderMenu').empty();
+                $('.childMenu').empty();
+                if (data.isPermission === 0) {
+                    layer.prompt({
+                        formType: 0,
+                        title: '请输入名称',
+                        value: data.name
+                    }, function (value, index) {
+                        $.ajax({
+                            url: '/admin/menu/update',
+                            data: {
+                                id: data.id,
+                                isPermission: data.isPermission,
+                                name: value
+                            },
+                            datatype: 'json',
+                            type: 'post',
+                            success: function (result) {
+                                layer.msg(result.msg);
+                                if (result.success) {
+                                    treeLoad();
+                                    layer.close(index);
+                                }
+                                treeLoad();
+                            }
+                        })
+                    })
+                } else if (data.isPermission === 1) {
+                    form.val('order-menu', data);
+                    parentMenuArray(data.parentId);
+
+                    index = layer.open({
+                        title: '编辑主菜单',
+                        type: 1,
+                        shade: 0.2,
+                        shadeClose: true,
+                        area: ['100%', '100%'],
+                        content: $('.order-menu'),
+                    });
+                    $(window).on("resize", function () {
+                        layer.full(index);
+                    })
+                } else if (data.isPermission === 2) {
+                    form.val('child-menu', data)
+                    $('input[name="path"]').val(data.menuValue);
+
+                    $.ajax({
+                        url: '/admin/menu/parentmenuid',
+                        data: {
+                            id: data.parentId
+                        },
+                        dataType: 'json',
+                        type: 'post',
+                        success: function (result) {
+                            if (result.success) {
+                                parentMenuArray(result.data);
+
+                                orderMenuArray(result.data, data.parentId);
+                                index = layer.open({
+                                    title: '编辑子菜单',
+                                    type: 1,
+                                    shade: 0.2,
+                                    shadeClose: true,
+                                    area: ['100%', '100%'],
+                                    content: $('.child-menu'),
+                                });
+                                $(window).on("resize", function () {
+                                    layer.full(index);
+                                })
+                            }
+                        }
+                    })
+                } else if (data.isPermission === 3) {
+                    form.val('interface-menu', data)
+                    $('input[name="id"]').val(data.falseId);
+                    $('input[name="path"]').val(data.permissionValue);
+                    $.ajax({
+                        url: '/admin/menu/interfacemenuid',
+                        data: {
+                            id: data.parentId
+                        },
+                        dataType: 'json',
+                        type: 'post',
+                        success: function (result) {
+                            if (result.success) {
+                                parentMenuArray(result.data);
+
+                                const ids = result.data;
+                                $.ajax({
+                                    url: '/admin/menu/parentmenuid',
+                                    data: {
+                                        id: data.parentId
+                                    },
+                                    dataType: 'json',
+                                    type: 'post',
+                                    success: function (result) {
+                                        if (result.success) {
+
+                                            orderMenuArray(ids, result.data);
+                                            childMenuArray(result.data, data.parentId);
+                                            index = layer.open({
+                                                title: '编辑接口',
+                                                type: 1,
+                                                shade: 0.2,
+                                                shadeClose: true,
+                                                area: ['100%', '100%'],
+                                                content: $('.interface-menu'),
+                                            });
+                                            $(window).on("resize", function () {
+                                                layer.full(index);
+                                            })
+                                        }
+                                    }
+                                })
+                            }
+                        }
+                    })
+                }
+            } else if (obj.event === 'delete') {
+                layer.confirm('真的删除行么？', function (index) {
+                    $.ajax({
+                        url: '/admin/menu/delete',
+                        type: 'post',
+                        data: {
+                            id: data.id,
+                            falseId: data.falseId,
+                            isPermission: data.isPermission
+                        },
+                        dataType: 'json',
+                        success: function (result) {
+                            layer.close(index);
+                            layer.msg(result.msg);
+                            treeLoad();
+                        }
+                    });
+                });
+            } else if (obj.event === 'on') {
+                layer.confirm('是否确定要启用？', function (index) {
+                    $.ajax({
+                        url: '/admin/menu/on',
+                        type: 'post',
+                        data: {
+                            id: data.id
+                        },
+                        dataType: 'json',
+                        success: function (result) {
+                            layer.msg(result.msg);
+                            layer.close(index);
+                            treeLoad();
+                        }
+                    });
+                });
+            } else if (obj.event === 'off') {
+                layer.confirm('是否确定要禁用？', function (index) {
+                    $.ajax({
+                        url: '/admin/menu/off',
+                        type: 'post',
+                        data: {
+                            id: data.id
+                        },
+                        dataType: 'json',
+                        success: function (result) {
+                            layer.close(index);
+                            layer.msg(result.msg);
+                            treeLoad();
+                        }
+                    });
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>

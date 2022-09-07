@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>地址信息</title>
+    <meta content="webkit" name="renderer">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+    <link href="/lib/layui-v2.6.3/css/layui.css" media="all" rel="stylesheet">
+    <link href="/css/public.css" media="all" rel="stylesheet">
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+
+        <script id="address_table_tool" type="text/html">
+            <div class="layui-btn-container">
+                <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加</button>
+            </div>
+        </script>
+
+        <table class="layui-hide" id="address_table" lay-filter="address_table"></table>
+
+        <script id="address_table_templet" type="text/html">
+            <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
+            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+        </script>
+
+    </div>
+</div>
+
+<form class="layui-form layui-form-pane" hidden id="add-form" lay-filter="add-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">添加地址</label>
+            <div class="layui-input-block">
+                <input checked lay-filter="module" name="check" title="添加省份" type="radio" value="parentMenu">
+                <input lay-filter="module" name="check" title="添加市级" type="radio" value="orderMenu">
+                <input lay-filter="module" name="check" title="添加区/县" type="radio" value="childMenu">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">名称</label>
+            <div class="layui-inline">
+                <input autocomplete="off" class="layui-input"
+                    lay-verify="required" lay-reqText="名称不能为空"   name="name" placeholder="请输入名称" type="text">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">省份</label>
+            <div class="layui-inline">
+                <select class="parentMenu" disabled lay-filter="parentMenu" name="parentMenu"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">市级</label>
+            <div class="layui-inline">
+                <select class="orderMenu" disabled lay-filter="orderMenu" name="orderMenu"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label"></label>
+            <div class="layui-inline">
+                <button class="layui-btn layui-bg-blue" lay-filter="add-submit" lay-submit="add-submit" type="submit">
+                    添加
+                </button>
+                <button class="layui-btn layui-bg-orange data-reset" type="reset">重置</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form class="layui-form layui-form-pane" hidden id="update-form" lay-filter="update-form">
+    <input hidden name="id" type="text">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">名称</label>
+            <div class="layui-inline">
+                <input autocomplete="off" class="layui-input" name="name" placeholder="请输入名称" type="text">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">省份</label>
+            <div class="layui-inline">
+                <select class="parentMenu" disabled lay-filter="parentMenu" name="parentMenu"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">市级</label>
+            <div class="layui-inline">
+                <select class="orderMenu" disabled lay-filter="orderMenu" name="orderMenu"></select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label"></label>
+            <div class="layui-inline">
+                <button class="layui-btn layui-bg-blue" lay-filter="update-submit" lay-submit="update-submit" type="submit">
+                    修改
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<script src="/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+<script charset="utf-8" src="/lib/layui-v2.6.3/layui.js"></script>
+<script charset="utf-8" src="/js/lay-config.js?v=1.0.4"></script>
+<script>
+    function loadTree() {
+        layui.use(['form', 'table', "layer", 'treetable'], function () {
+            const $ = layui.jquery,
+                form = layui.form,
+                table = layui.table,
+                treetable = layui.treetable;
+
+            let layer = layui.layer;
+
+            // 渲染表格
+            layer.load(2);
+            treetable.render({
+                treeColIndex: 1,
+                treeSpid: 0,
+                url: '/addressComment/list',
+                where: {
+                    tree: true
+                },
+                toolbar: '#address_table_tool',
+                treeIdName: 'id',
+                treePidName: 'parentId',
+                elem: '#address_table',
+                page: false,
+                cols: [
+                    [
+                        {field: 'id', width: 50, title: 'ID'},
+                        {field: 'name', minWidth: 200, title: '地址名称'},
+                        {field: 'parentId', minWidth: 200, title: '父级ID'},
+                        {field: 'createTime', width: 200, align: 'center', sort: true, title: '创建时间'},
+                        {field: 'updateTime', width: 200, align: 'center', sort: true, title: '修改时间'},
+                        {templet: '#address_table_templet', width: 180, align: 'center', title: '操作'}
+                    ]
+                ],
+                done: function () {
+                    layer.closeAll('loading')
+                }
+            });
+        })
+    }
+
+    layui.use(['form', 'table', "layer", 'treetable'], function () {
+        const $ = layui.jquery,
+            form = layui.form,
+            table = layui.table,
+            treetable = layui.treetable;
+
+        let layer = layui.layer;
+
+        loadTree();
+
+        let index;
+
+        function parentMenuArray(data){
+            $.ajax({
+                type:'post',
+                url:'/addressComment/find',
+                // data:{'pid':0},
+                success:function (result) {
+                    const parentMenu=$('.parentMenu');
+                    parentMenu.empty();
+                    parentMenu.append('<option value="">请选择</option>');
+                    $.each(result,function (i,object){
+                        parentMenu.append('<option value="' + object.id + '">' + object.name + '</option>');
+                    })
+                        if (data!==undefined){
+                        parentMenu.val(""+data+"").click();
+                    }
+                    layui.form.render();
+                }
+            })
+        }
+        function orderMenuArray(data, obj) {
+            $.ajax({
+                type: 'post',
+                url: '/addressComment/finds',
+                data: {
+                    pid: data
+                },
+                dataType: 'json',
+                success: function (result) {
+                    const orderMenu = $('.orderMenu');
+                    orderMenu.empty();
+                    orderMenu.append('<option value="">请选择</option>');
+                    $.each(result, function (i, object) {
+                        orderMenu.append('<option value="' + object.id + '">' + object.name + '</option>');
+                    })
+                    if (obj!==undefined){
+                        orderMenu.val(""+obj+"").click();
+                    }
+                    layui.form.render();
+                }
+            })
+        }
+
+        //按照选中的按钮来给权限
+        form.on('radio(module)', function (data) {
+            const parentMenu = $('.parentMenu');
+            const orderMenu = $('.orderMenu');
+            const childMenu = $('.childMenu');
+            if (data.value === 'parentMenu') {
+                parentMenu.attr('disabled', true).attr('lay-verify', '').empty();
+                orderMenu.attr('disabled', true).attr('lay-verify', '').empty();
+                childMenu.attr('disabled', true).attr('lay-verify', '').empty();
+            } else if (data.value === 'orderMenu') {
+                parentMenuArray();
+                parentMenu.attr('disabled', false).attr('lay-verify', 'required').empty();
+                childMenu.attr('disabled', true).attr('lay-verify', '').empty();
+                orderMenu.attr('disabled', true).attr('lay-verify', '').empty();
+            } else if (data.value === 'childMenu') {
+                parentMenuArray();
+                parentMenu.attr('disabled', false).attr('lay-verify', 'required').empty();
+                childMenu.attr('disabled', true).attr('lay-verify', '').empty();
+                orderMenu.attr('disabled', false).attr('lay-verify', 'required').empty();
+            }
+            layui.form.render()
+        });
+
+        form.on('select(parentMenu)', function (data) {
+            orderMenuArray(data.value);
+        })
+
+        // form.on('select(orderMenu)', function (data) {
+        //     childMenuArray(data.value);
+        // })
+
+        // 添加地址
+        form.on('submit(add-submit)', function (data) {
+            $.ajax({
+                url: '/addressComment/add',
+                type: 'post',
+                data: data.field,
+                dataType: 'json',
+                success: function (result) {
+                    layer.close(index);
+                    layer.msg('添加成功');//弹出添加成功,重新加载页面
+                    loadTree();
+
+                    if(result===3){
+                        layer.msg('添加失败,已存在同名地区');
+                    }
+                }
+            });
+            return false;
+        });
+
+        // 修改地址
+        form.on('submit(update-submit)', function (data) {
+            console.log(data.field)//控制台输出
+            $.ajax({
+                url: '/addressComment/update',
+                type: 'post',
+                data: data.field,
+                dataType: 'json',
+                success: function (result) {
+                    layer.msg('修改成功');
+                    layer.close(index);
+                    loadTree();
+
+                }
+            });
+            return false;
+        });
+
+        /**
+         * toolbar监听事件
+         */
+        table.on('toolbar(address_table)', function (obj) {
+            if (obj.event === 'add') {  // 监听添加操作
+                $('.data-reset').click();
+                const parentMenu = $('.parentMenu');
+                const orderMenu = $('.orderMenu');
+                const childMenu = $('.childMenu');
+                parentMenu.attr('disabled', true).attr('lay-verify', '').empty();
+                orderMenu.attr('disabled', true).attr('lay-verify', '').empty();
+                childMenu.attr('disabled', true).attr('lay-verify', '').empty();
+                index = layer.open({
+                    title: '添加地址信息',
+                    type: 1,
+                    shade: 0.2,
+                    shadeClose: true,
+                    area: ['100%', '100%'],
+                    content: $('#add-form'),
+                });
+                $(window).on("resize", function () {
+                    layer.full(index);
+                });
+            }
+        });
+
+        table.on('tool(address_table)', function (obj) {
+            const data = obj.data;
+            // 修改地址
+            if (obj.event === 'edit') {//监听修改操作
+               form.val("update-form",data);//回显要修改的这条数据在form表单中
+                const parentMenu = $('.parentMenu');
+                const orderMenu = $('.orderMenu');
+                if(data.level===0){
+                    parentMenu.attr('disabled', true).attr('lay-verify', '').empty();
+                    orderMenu.attr('disabled', true).attr('lay-verify', '').empty();
+                }else if(data.level===1){
+                    parentMenuArray(data.parentId);
+                    parentMenu.attr('disabled', false).attr('lay-verify', 'required').empty();
+                    orderMenu.attr('disabled', true).attr('lay-verify', '').empty();
+                }else if(data.level===2){
+                    parentMenu.attr('disabled', false).attr('lay-verify', 'required').empty();
+                    orderMenu.attr('disabled', false).attr('lay-verify', 'required').empty();
+                        $.ajax({
+                            url: '/addressComment/findtwo',
+                            type: 'post',
+                            data: {
+                                id: data.parentId
+                            },
+                            dataType: 'json',
+                            success: function (result,textStatus) {
+                                //ajax 集合类型要用[]，对象才可以直接.
+                                // alert(data[0]);
+                                // alert(data[0].parent_id);
+                                   parentMenuArray(result[0].parent_id);
+                                   orderMenuArray(result[0].parent_id, data.parentId);
+                                   //将市级下拉框展示出来，
+                                // data.parentId:是要下拉框选中的值
+
+
+                                  // $.ajax({
+                                  //     url:'/addressComment/findtwo',
+                                  //     type:'post',
+                                  //     data:{
+                                  //         id:item.parent_id
+                                  //     },
+                                  //     dataType:'json',
+                                  //     success:function (data,textStatus){
+                                  //         parentMenuArray(data.id);
+                                  //     }
+                                  // })
+                            },
+                            error:function(XMLHttpRequest,textStatus){
+                              alert("ajax请求失败");
+                            }
+                        });
+
+                }
+                index=layer.open({
+                    title: '添加地址信息',
+                    type: 1,
+                    shade: 0.2,
+                    shadeClose: true,
+                    area: ['100%', '100%'],
+                    content: $('#update-form'),
+                });
+
+            } else if (obj.event === 'delete') {
+                // 删除数据
+                layer.confirm('真的删除行么？', function (index) {
+                    $.ajax({
+                        url: '/addressComment/del',
+                        type: 'post',
+                        data: {
+                            id: data.id
+                        },
+                        dataType: 'json',
+                        success: function (result) {
+                            layer.close(index);
+                            layer.msg('删除成功');
+                            loadTree();
+                        }
+                    });
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>

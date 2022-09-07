@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>辕门-IM</title>
+    <style>
+        .connection {
+            text-align: center;
+            height: 50px;
+            line-height: 50px;
+            width: 100%;
+        }
+        .info {
+            text-align: center;
+            height: 50px;
+        }
+        .text-left {
+            width: 50%;
+            box-shadow: rgba(0, 0, 0, 0.15) 0 3px 3px 0;
+            margin: 10px 0 10px 45%;
+            padding: 0 10px;
+            /* display: flex; */
+            text-align: end;
+            line-height: 30px;
+        }
+        .right-text {
+            width: 50%;
+            margin: 10px 0;
+            padding: 0 10px;
+            line-height: 30px;
+            box-shadow: rgba(0, 0, 0, 0.15) 0 3px 3px 0;
+        }
+        #clientChat {
+            position: fixed;
+            bottom: 0;
+            height: 48px;
+            display: flex;
+            width: 100%;
+            right: 0;
+        }
+        #sendMsg {
+            width: 70%;
+            outline: none;
+            font-size: 18px;
+            text-align: center;
+        }
+        #send1 {
+            width: 30%;
+            border: none;
+            outline: none;
+            background-color: #1E9fff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<p id="message"></p>
+<form id="clientChat">
+    <input type="text" style="display: none;" id="userName"  />
+    <input type="text" style="display: none;" id="targetUserName" />
+    <input type="text" id="sendMsg" placeholder="请输入内容" autocomplete="off" />
+    <button type="button" onclick="send()" id="send1">发送</button>
+</form>
+</body>
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script>
+    let websocket = null;
+
+    const userId = null;
+
+    if('WebSocket' in window){
+        websocket = new WebSocket("ws://127.0.0.1:8080/websocket/0");
+    } else {
+        console.log("无法连接到websocket!")
+    }
+
+    websocket.onerror = function(){
+        console.log("连接错误!");
+    };
+
+    websocket.onopen = function(event){
+        setMessageInnerHTML('<div class="connection">连接已建立！</div>');
+    }
+
+    websocket.onmessage = function(event){
+        const result = event.data;
+        const ob = JSON.parse(result);
+
+        if(ob.state !== undefined && ob.state !== "success"){
+            setMessageInnerHTML("非法连接！");
+            websocket.close();
+        }
+
+        if(ob.msg !== undefined){
+            setMessageInnerHTML(ob.msg);
+        }
+    }
+
+    websocket.onclose = function(){
+        setMessageInnerHTML('<div class="close-connection">关闭连接！</div>');
+    }
+
+    window.onbeforeunload = function(){
+        websocket.close();
+    }
+
+    function setMessageInnerHTML(innerHTML){
+        $('#message').append(innerHTML);
+    }
+
+    function closeWebSocket(){
+        websocket.close();
+    }
+
+    function send(){
+        const sendMsg = $("#sendMsg");
+        setMessageInnerHTML('<div class="right-text box-shadow">我：' + sendMsg.val() + '</div>')
+        websocket.send(sendMsg.val());
+        sendMsg.val("");
+    }
+</script>
+</html>
